@@ -13,18 +13,14 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        /* Fondo estilo Frutiger Aero (Cielo / Agua) con imagen más visible */
+        /* Fondo estilo Frutiger Aero */
         body {
-            /* He bajado la opacidad del gradiente a 0.4 para que se vea mucho más la imagen */
             background: linear-gradient(135deg, rgba(161, 223, 251, 0.4) 0%, rgba(212, 240, 255, 0.4) 50%, rgba(137, 207, 240, 0.4) 100%), 
-                        url('fondo.jpg'); /* <-- Se asume que fondo.jpg está en la misma carpeta */
-            
-            /* Configuraciones para acoplar la imagen a toda la pantalla sin repetirse */
-            background-size: cover;          /* Cubre toda la pantalla */
-            background-repeat: no-repeat;     /* No se repite */
-            background-position: center;     /* Centrada */
-            background-attachment: fixed;    /* Fija al hacer scroll */
-            
+                        url('fondo.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
             min-height: 100vh;
             color: #1a4a5e;
             display: flex;
@@ -33,7 +29,7 @@
             padding: 2rem;
         }
 
-        /* Encabezado con efecto cristal (Glassmorphism) */
+        /* Encabezado con efecto cristal */
         header {
             background: rgba(255, 255, 255, 0.45);
             backdrop-filter: blur(12px);
@@ -85,7 +81,7 @@
             margin: 0 10px;
         }
 
-        /* Contenedor de las carpetas/enlaces */
+        /* Contenedor de las carpetas */
         .grid-container {
             display: flex;
             flex-wrap: wrap;
@@ -94,7 +90,7 @@
             max-width: 1000px;
         }
 
-        /* Botones / Enlaces brillantes (Glossy) */
+        /* Botones Glossy */
         .folder-link {
             display: flex;
             flex-direction: column;
@@ -127,20 +123,16 @@
             overflow: hidden;
         }
 
-        /* Reflejo superior típico de Frutiger Aero */
         .glossy-box::after {
             content: '';
             position: absolute;
-            top: 2%;
-            left: 5%;
-            width: 90%;
-            height: 45%;
+            top: 2%; left: 5%;
+            width: 90%; height: 45%;
             background: linear-gradient(180deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.1) 100%);
             border-radius: 20px 20px 100px 100px;
             pointer-events: none;
         }
 
-        /* Imágenes dentro de los botones */
         .glossy-box img {
             width: 65%;
             height: 65%;
@@ -179,35 +171,35 @@
     </header>
 
     <main class="grid-container">
-        <a href="https://drive.google.com/drive/folders/1HCCZZDh-3TmtHITPpE0YiHl8eUbq9Pgg?usp=sharing" target="_blank" class="folder-link">
+        <a href="https://drive.google.com/file/d/1HCCZZDh-3TmtHITPpE0YiHl8eUbq9Pgg/preview" target="_blank" class="folder-link">
             <div class="glossy-box">
                 <img src="silabo.jpg" alt="Icono Sílabo">
             </div>
             <span class="folder-name">Sílabo</span>
         </a>
 
-        <a href="https://drive.google.com/drive/folders/1a83z9ZR0w2kIdfg8-1TQFTdEvGQ1Oo3d?usp=sharing" target="_blank" class="folder-link">
+        <a href="https://drive.google.com/file/d/1a83z9ZR0w2kIdfg8-1TQFTdEvGQ1Oo3d/preview" target="_blank" class="folder-link">
             <div class="glossy-box">
                 <img src="personal.png" alt="Icono Información">
             </div>
             <span class="folder-name">Información Personal</span>
         </a>
 
-        <a href="https://drive.google.com/drive/folders/1d_qy1ekySy0vd5F8oWTYizhkQ0E5K3XE?usp=sharing" target="_blank" class="folder-link">
+        <a href="https://drive.google.com/file/d/1d_qy1ekySy0vd5F8oWTYizhkQ0E5K3XE/preview" target="_blank" class="folder-link">
             <div class="glossy-box">
                 <img src="tareas.webp" alt="Icono Tareas">
             </div>
             <span class="folder-name">Tareas</span>
         </a>
 
-        <a href="https://drive.google.com/drive/folders/1egO42WSd4rjQnrtDHt8KJ0OR0SWEJffv?usp=sharing" target="_blank" class="folder-link">
+        <a href="https://drive.google.com/file/d/1egO42WSd4rjQnrtDHt8KJ0OR0SWEJffv/preview" target="_blank" class="folder-link">
             <div class="glossy-box">
                 <img src="grpal.avif" alt="Icono Grupales">
             </div>
             <span class="folder-name">Tareas Grupales</span>
         </a>
 
-        <a href="https://drive.google.com/drive/folders/11TtmBMVXQ8QI19hQ1d5L-Meyk_uAOSLY?usp=sharing" target="_blank" class="folder-link">
+        <a href="https://drive.google.com/file/d/11TtmBMVXQ8QI19hQ1d5L-Meyk_uAOSLY/preview" target="_blank" class="folder-link">
             <div class="glossy-box">
                 <img src="centro.jpg" alt="Icono Centro Física">
             </div>
