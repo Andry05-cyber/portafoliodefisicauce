@@ -5,151 +5,208 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portafolio Pro - Física Aplicada</title>
     <style>
-        /* Base y Fondo Frutiger Aero */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        /* Base y Estética Frutiger Aero */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
 
         body {
             background: linear-gradient(135deg, rgba(161, 223, 251, 0.4) 0%, rgba(212, 240, 255, 0.4) 50%, rgba(137, 207, 240, 0.4) 100%), 
                         url('fondo.jpg'); 
-            background-size: cover; background-attachment: fixed;
+            background-size: cover; background-repeat: no-repeat; background-position: center; background-attachment: fixed;
             min-height: 100vh; color: #1a4a5e; display: flex; flex-direction: column; align-items: center; padding: 2rem;
         }
 
-        /* Cristalería (Glassmorphism) */
+        /* Efecto Cristal (Glassmorphism) */
         header, .submenu-card {
             background: rgba(255, 255, 255, 0.45);
             backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.8);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-            border-radius: 20px; padding: 2rem; width: 100%; max-width: 900px; text-align: center; margin-bottom: 2rem;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15), inset 0 1px 0 rgba(255,255,255,1);
+            border-radius: 20px; padding: 2rem; width: 100%; max-width: 900px; text-align: center; margin-bottom: 2.5rem;
         }
+
+        header h1 { font-size: 1.8rem; color: #005682; text-shadow: 1px 1px 3px rgba(255,255,255,0.8); }
 
         .personal-info {
             display: inline-block; background: linear-gradient(180deg, rgba(255,255,255,0.9) 0%, rgba(230,245,255,0.7) 100%);
-            padding: 10px 25px; border-radius: 50px; font-weight: bold; color: #023e8a; margin-top: 10px;
+            padding: 10px 25px; border-radius: 50px; border: 1px solid rgba(255,255,255,0.9);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); font-weight: bold; color: #023e8a; margin-top: 15px;
         }
 
-        /* Grid de Botones */
+        /* Grid de Navegación */
         .grid-container {
-            display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; max-width: 1100px;
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 2.5rem; max-width: 1000px;
         }
 
         .folder-link {
             display: flex; flex-direction: column; align-items: center; text-decoration: none;
-            transition: all 0.3s ease; width: 150px; cursor: pointer;
+            transition: all 0.3s ease; width: 160px; cursor: pointer;
         }
 
-        .folder-link:hover { transform: translateY(-10px); }
+        .folder-link:hover { transform: translateY(-10px) scale(1.05); }
 
         .glossy-box {
-            width: 110px; height: 110px; border-radius: 25px;
+            width: 120px; height: 120px; border-radius: 25px;
             background: linear-gradient(180deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.2) 49%, rgba(255,255,255,0.0) 50%, rgba(255,255,255,0.4) 100%);
-            box-shadow: 0 10px 20px rgba(0, 119, 182, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            display: flex; justify-content: center; align-items: center; margin-bottom: 0.8rem; position: relative; overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 119, 182, 0.2), inset 0 2px 3px rgba(255, 255, 255, 1);
+            border: 1px solid rgba(255, 255, 255, 0.6); display: flex; justify-content: center; align-items: center;
+            margin-bottom: 1rem; position: relative; overflow: hidden;
         }
 
-        .glossy-box img { width: 60%; height: 60%; object-fit: contain; z-index: 1; }
+        .glossy-box::after {
+            content: ''; position: absolute; top: 2%; left: 5%; width: 90%; height: 45%;
+            background: linear-gradient(180deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.1) 100%);
+            border-radius: 20px 20px 100px 100px; pointer-events: none;
+        }
+
+        .glossy-box img, .glossy-box span.icon { width: 65%; height: 65%; object-fit: contain; z-index: 1; font-size: 3rem; display: flex; justify-content: center; align-items: center; }
 
         .folder-name {
-            font-size: 0.9rem; font-weight: 600; color: #005682; text-align: center;
-            background: rgba(255,255,255,0.5); padding: 5px 12px; border-radius: 12px;
+            font-size: 0.95rem; font-weight: 600; color: #005682; text-align: center;
+            background: rgba(255,255,255,0.4); padding: 5px 15px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.5);
         }
 
-        /* Visor e Interfaz de Navegación */
-        #viewer-container, .submenu-section { display: none; width: 100%; flex-direction: column; align-items: center; }
+        /* Secciones y Visor */
+        .submenu-section, #viewer-container { display: none; width: 100%; flex-direction: column; align-items: center; }
 
         iframe {
-            width: 100%; height: 80vh; border-radius: 15px; border: 4px solid white;
-            background: white; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            width: 100%; height: 75vh; border-radius: 15px; border: 4px solid rgba(255, 255, 255, 0.8);
+            background: white; box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
 
         .btn-nav {
-            margin-bottom: 20px; padding: 10px 25px;
+            margin-bottom: 20px; padding: 12px 30px;
             background: linear-gradient(180deg, #4cc9f0 0%, #4361ee 100%);
             color: white; border: none; border-radius: 50px; font-weight: bold; cursor: pointer;
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4); transition: 0.3s;
         }
+
+        .btn-nav:hover { transform: scale(1.05); filter: brightness(1.1); }
+
     </style>
 </head>
 <body>
 
     <header id="main-header">
         <h1>Universidad Central del Ecuador</h1>
-        <div class="personal-info">Andrés Jumbo | Física Aplicada</div>
+        <div class="personal-info">
+            <span>Andrés Jumbo</span> | <span>5to Semestre</span> | <span>Física Aplicada</span>
+        </div>
     </header>
 
     <main class="grid-container" id="menu-root">
-        <div class="folder-link" onclick="openDoc('URL_SILABO_DIRECTO')">
-            <div class="glossy-box"><img src="silabo.jpg"></div>
+        <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1wA377hozXZNZ_TnupGgHwxMVLo30DcMC/preview')">
+            <div class="glossy-box"><img src="silabo.jpg" alt="Sílabo"></div>
             <span class="folder-name">Sílabo</span>
         </div>
+
         <div class="folder-link" onclick="showSubmenu('menu-info')">
-            <div class="glossy-box"><img src="personal.png"></div>
+            <div class="glossy-box"><img src="personal.png" alt="Información"></div>
             <span class="folder-name">Información Personal</span>
         </div>
-        <div class="folder-link" onclick="showSubmenu('menu-tareas-ind')">
-            <div class="glossy-box"><img src="tareas.webp"></div>
+
+        <div class="folder-link" onclick="showSubmenu('menu-tareas')">
+            <div class="glossy-box"><img src="tareas.webp" alt="Tareas"></div>
             <span class="folder-name">Tareas Individuales</span>
         </div>
+
         <div class="folder-link" onclick="showSubmenu('menu-centro')">
-            <div class="glossy-box"><img src="centro.jpg"></div>
+            <div class="glossy-box"><img src="centro.jpg" alt="Centro Física"></div>
             <span class="folder-name">Centro de Física</span>
         </div>
     </main>
 
     <section class="submenu-section" id="menu-info">
-        <button class="btn-nav" onclick="goBack('menu-root')">← Volver</button>
+        <button class="btn-nav" onclick="goBack('menu-root')">← Volver al Inicio</button>
         <div class="grid-container">
-            <div class="folder-link" onclick="openDoc('URL_CV')"><div class="glossy-box">📄</div><span class="folder-name">Currículum</span></div>
-            <div class="folder-link" onclick="openDoc('URL_MATRICULA')"><div class="glossy-box">📝</div><span class="folder-name">Matrícula</span></div>
-            <div class="folder-link" onclick="openDoc('URL_HORARIO')"><div class="glossy-box">📅</div><span class="folder-name">Horario Académico</span></div>
-            <div class="folder-link" onclick="openDoc('URL_INGLES')"><div class="glossy-box">🇬🇧</div><span class="folder-name">Horario Inglés</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1POJ5M3LCm76Xr4IzQrBj58eSOz2ND3CH/preview')">
+                <div class="glossy-box"><span class="icon">📄</span></div>
+                <span class="folder-name">Currículum</span>
+            </div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/18byDHbYDa-ZRSJj4d4kjAO99r2SujT5q/preview')">
+                <div class="glossy-box"><span class="icon">📝</span></div>
+                <span class="folder-name">Matrícula</span>
+            </div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/16UzyIug5kpK8Eo7pTCz057yDpVHkv7Me/preview')">
+                <div class="glossy-box"><span class="icon">📅</span></div>
+                <span class="folder-name">Horario Académico</span>
+            </div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1wdt7MqIi-xdBw9A-77Wgx20bjONnanQI/preview')">
+                <div class="glossy-box"><span class="icon">🇬🇧</span></div>
+                <span class="folder-name">Horario Inglés</span>
+            </div>
         </div>
     </section>
 
-    <section class="submenu-section" id="menu-tareas-ind">
-        <button class="btn-nav" onclick="goBack('menu-root')">← Volver</button>
+    <section class="submenu-section" id="menu-tareas">
+        <button class="btn-nav" onclick="goBack('menu-root')">← Volver al Inicio</button>
         <div class="grid-container">
-            <div class="folder-link" onclick="showSubmenu('menu-u1')"><div class="glossy-box">1️⃣</div><span class="folder-name">Unidad 1</span></div>
-            <div class="folder-link" onclick="showSubmenu('menu-u2')"><div class="glossy-box">2️⃣</div><span class="folder-name">Unidad 2</span></div>
+            <div class="folder-link" onclick="showSubmenu('menu-u1')">
+                <div class="glossy-box"><span class="icon">1️⃣</span></div>
+                <span class="folder-name">Unidad 1</span>
+            </div>
+            <div class="folder-link" onclick="showSubmenu('menu-u2')">
+                <div class="glossy-box"><span class="icon">2️⃣</span></div>
+                <span class="folder-name">Unidad 2</span>
+            </div>
         </div>
     </section>
 
     <section class="submenu-section" id="menu-u1">
-        <button class="btn-nav" onclick="goBack('menu-tareas-ind')">← Volver</button>
+        <button class="btn-nav" onclick="goBack('menu-tareas')">← Volver a Unidades</button>
         <div class="grid-container">
-            <div class="folder-link" onclick="openDoc('URL_TAREA1')"><div class="glossy-box">📓</div><span class="folder-name">Tarea 1</span></div>
+            <div class="folder-link" onclick="openDoc('URL_TAREA_1_U1')">
+                <div class="glossy-box"><span class="icon">📓</span></div>
+                <span class="folder-name">Tarea 1</span>
+            </div>
         </div>
     </section>
 
     <section class="submenu-section" id="menu-centro">
-        <button class="btn-nav" onclick="goBack('menu-root')">← Volver</button>
+        <button class="btn-nav" onclick="goBack('menu-root')">← Volver al Inicio</button>
         <div class="grid-container">
-            <div class="folder-link" onclick="showSubmenu('menu-p1')"><div class="glossy-box">🔬</div><span class="folder-name">Práctica 1</span></div>
-            <div class="folder-link" onclick="showSubmenu('menu-p2')"><div class="glossy-box">🔬</div><span class="folder-name">Práctica 2</span></div>
+            <div class="folder-link" onclick="showSubmenu('menu-p1')">
+                <div class="glossy-box"><span class="icon">🔬</span></div>
+                <span class="folder-name">Práctica 1</span>
+            </div>
+            <div class="folder-link" onclick="showSubmenu('menu-p2')">
+                <div class="glossy-box"><span class="icon">🔬</span></div>
+                <span class="folder-name">Práctica 2</span>
+            </div>
         </div>
     </section>
 
     <section class="submenu-section" id="menu-p1">
-        <button class="btn-nav" onclick="goBack('menu-centro')">← Volver</button>
+        <button class="btn-nav" onclick="goBack('menu-centro')">← Volver a Prácticas</button>
         <div class="grid-container">
-            <div class="folder-link" onclick="openDoc('URL_INFORME_P1')"><div class="glossy-box">📘</div><span class="folder-name">Informe</span></div>
-            <div class="folder-link" onclick="openDoc('URL_FUNDAMENTO_P1')"><div class="glossy-box">📖</div><span class="folder-name">Fundamento</span></div>
+            <div class="folder-link" onclick="openDoc('URL_INFORME_P1')">
+                <div class="glossy-box"><span class="icon">📘</span></div>
+                <span class="folder-name">Informe</span>
+            </div>
+            <div class="folder-link" onclick="openDoc('URL_FUNDAMENTO_P1')">
+                <div class="glossy-box"><span class="icon">📖</span></div>
+                <span class="folder-name">Fundamento</span>
+            </div>
         </div>
     </section>
 
     <section id="viewer-container">
         <button class="btn-nav" id="btn-cerrar-visor">← Cerrar Documento</button>
-        <iframe id="doc-iframe" src=""></iframe>
+        <iframe id="doc-iframe" src="" frameborder="0"></iframe>
     </section>
 
     <script>
         let currentMenuId = 'menu-root';
 
         function showSubmenu(menuId) {
-            document.querySelectorAll('main, .submenu-section, #viewer-container').forEach(el => el.style.display = 'none');
+            // Ocultar todo
+            document.getElementById('menu-root').style.display = 'none';
+            document.querySelectorAll('.submenu-section').forEach(s => s.style.display = 'none');
+            document.getElementById('viewer-container').style.display = 'none';
+            
+            // Mostrar el elegido
             document.getElementById(menuId).style.display = 'flex';
             currentMenuId = menuId;
+            window.scrollTo(0, 0);
         }
 
         function goBack(targetId) {
@@ -157,17 +214,23 @@
         }
 
         function openDoc(url) {
-            document.querySelectorAll('main, .submenu-section').forEach(el => el.style.display = 'none');
+            // Ocultar menús y mostrar visor
+            document.getElementById('menu-root').style.display = 'none';
+            document.querySelectorAll('.submenu-section').forEach(s => s.style.display = 'none');
+            
             const viewer = document.getElementById('viewer-container');
             viewer.style.display = 'flex';
             document.getElementById('doc-iframe').src = url;
-            
-            // Al cerrar el visor, vuelve al submenú donde estabas
+
+            // Al cerrar, vuelve al menú donde estabas parado
             document.getElementById('btn-cerrar-visor').onclick = function() {
                 viewer.style.display = 'none';
                 document.getElementById(currentMenuId).style.display = 'flex';
+                document.getElementById('doc-iframe').src = "";
             };
+            window.scrollTo(0, 0);
         }
     </script>
+
 </body>
 </html>
