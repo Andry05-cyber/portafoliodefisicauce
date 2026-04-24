@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portafolio Pro - Física Aplicada</title>
+    <title>Portafolio - Física Aplicada</title>
     <style>
-        /* Base y Estética Frutiger Aero */
+        /* Estética Frutiger Aero */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
 
         body {
@@ -15,8 +15,8 @@
             min-height: 100vh; color: #1a4a5e; display: flex; flex-direction: column; align-items: center; padding: 2rem;
         }
 
-        /* Cristal de fondo */
-        header, .submenu-card {
+        /* Encabezado */
+        header {
             background: rgba(255, 255, 255, 0.45);
             backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.8);
@@ -25,11 +25,14 @@
         }
 
         header h1 { font-size: 1.8rem; color: #005682; text-shadow: 1px 1px 3px rgba(255,255,255,0.8); }
+        header h2 { font-size: 1.3rem; color: #023e8a; margin-top: 5px; }
+        header p { font-size: 1.1rem; color: #0077b6; }
 
-        .personal-info {
+        .header-details {
             display: inline-block; background: linear-gradient(180deg, rgba(255,255,255,0.9) 0%, rgba(230,245,255,0.7) 100%);
-            padding: 10px 25px; border-radius: 50px; border: 1px solid rgba(255,255,255,0.9);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05); font-weight: bold; color: #023e8a; margin-top: 15px;
+            padding: 15px 25px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.9);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); font-weight: bold; color: #023e8a; margin-top: 15px; width: 100%;
+            line-height: 1.6;
         }
 
         /* Contenedores */
@@ -47,7 +50,7 @@
             background: linear-gradient(180deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.2) 49%, rgba(255,255,255,0.0) 50%, rgba(255,255,255,0.4) 100%);
             box-shadow: 0 10px 20px rgba(0, 119, 182, 0.2), inset 0 2px 3px rgba(255, 255, 255, 1);
             border: 1px solid rgba(255, 255, 255, 0.6); display: flex; justify-content: center; align-items: center;
-            margin-bottom: 1rem; position: relative; overflow: hidden;
+            margin-bottom: 1rem; position: relative; overflow: hidden; font-size: 2.8rem;
         }
 
         .glossy-box::after {
@@ -56,21 +59,15 @@
             border-radius: 20px 20px 100px 100px; pointer-events: none;
         }
 
-        .icon { font-size: 2.8rem; z-index: 1; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); }
-        .glossy-box img { width: 65%; height: 65%; object-fit: contain; z-index: 1; }
-
         .folder-name {
             font-size: 0.9rem; font-weight: 600; color: #005682; text-align: center;
             background: rgba(255,255,255,0.5); padding: 5px 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.5);
         }
 
-        /* Estilos de navegación y visor */
+        /* Secciones y Visor */
         .submenu-section, #viewer-container { display: none; width: 100%; flex-direction: column; align-items: center; }
 
-        iframe {
-            width: 100%; height: 80vh; border-radius: 15px; border: 4px solid rgba(255, 255, 255, 0.8);
-            background: white; box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
+        iframe { width: 100%; height: 82vh; border-radius: 15px; border: 4px solid white; background: white; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
 
         .btn-nav {
             margin-bottom: 20px; padding: 12px 30px;
@@ -87,29 +84,29 @@
 
     <header id="main-header">
         <h1>Universidad Central del Ecuador</h1>
-        <div class="personal-info">Andrés Jumbo | 5to Semestre | Física Aplicada</div>
+        <h2>Facultad de Filosofía, Ciencias y Letras de la Educación</h2>
+        <p>Pedagogía en Ciencias Experimentales Informática</p>
+        <div class="header-details">
+            Portafolio de Física Aplicada | Andrés Jumbo | 5to Semestre<br>
+            Profesor: Diego Tipán
+        </div>
     </header>
 
     <main class="grid-container" id="menu-root">
         <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1wA377hozXZNZ_TnupGgHwxMVLo30DcMC/preview')">
-            <div class="glossy-box"><img src="silabo.jpg" alt="Sílabo"></div>
-            <span class="folder-name">Sílabo</span>
+            <div class="glossy-box">📜</div><span class="folder-name">Sílabo</span>
         </div>
         <div class="folder-link" onclick="showSubmenu('menu-info')">
-            <div class="glossy-box"><img src="personal.png" alt="Información"></div>
-            <span class="folder-name">Información Personal</span>
+            <div class="glossy-box">👤</div><span class="folder-name">Información Personal</span>
         </div>
         <div class="folder-link" onclick="showSubmenu('menu-tareas-ind')">
-            <div class="glossy-box"><img src="tareas.webp" alt="Tareas Ind"></div>
-            <span class="folder-name">Tareas Individuales</span>
+            <div class="glossy-box">📓</div><span class="folder-name">Tareas Individuales</span>
         </div>
         <div class="folder-link" onclick="showSubmenu('menu-tareas-grp')">
-            <div class="glossy-box"><span class="icon">👥</span></div>
-            <span class="folder-name">Tareas Grupales</span>
+            <div class="glossy-box">👥</div><span class="folder-name">Tareas Grupales</span>
         </div>
         <div class="folder-link" onclick="showSubmenu('menu-centro')">
-            <div class="glossy-box"><img src="centro.jpg" alt="Centro Física"></div>
-            <span class="folder-name">Centro de Física</span>
+            <div class="glossy-box">🔬</div><span class="folder-name">Centro de Física</span>
         </div>
     </main>
 
@@ -117,16 +114,16 @@
         <button class="btn-nav" onclick="goBack('menu-root')">← Volver al Inicio</button>
         <div class="grid-container">
             <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1POJ5M3LCm76Xr4IzQrBj58eSOz2ND3CH/preview')">
-                <div class="glossy-box"><span class="icon">👨‍🎓</span></div><span class="folder-name">Currículum</span>
+                <div class="glossy-box">👨‍🎓</div><span class="folder-name">Currículum</span>
             </div>
             <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/18byDHbYDa-ZRSJj4d4kjAO99r2SujT5q/preview')">
-                <div class="glossy-box"><span class="icon">📝</span></div><span class="folder-name">Matrícula</span>
+                <div class="glossy-box">📝</div><span class="folder-name">Matrícula</span>
             </div>
             <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/16UzyIug5kpK8Eo7pTCz057yDpVHkv7Me/preview')">
-                <div class="glossy-box"><span class="icon">📅</span></div><span class="folder-name">Horario Académico</span>
+                <div class="glossy-box">📅</div><span class="folder-name">Horario General</span>
             </div>
             <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1wdt7MqIi-xdBw9A-77Wgx20bjONnanQI/preview')">
-                <div class="glossy-box"><span class="icon">🇬🇧</span></div><span class="folder-name">Horario Inglés</span>
+                <div class="glossy-box">🇬🇧</div><span class="folder-name">Horario Inglés</span>
             </div>
         </div>
     </section>
@@ -134,27 +131,27 @@
     <section class="submenu-section" id="menu-tareas-ind">
         <button class="btn-nav" onclick="goBack('menu-root')">← Volver al Inicio</button>
         <div class="grid-container">
-            <div class="folder-link" onclick="showSubmenu('menu-ind-u1')"><div class="glossy-box"><span class="icon">1️⃣</span></div><span class="folder-name">Unidad 1</span></div>
-            <div class="folder-link" onclick="showSubmenu('menu-ind-u2')"><div class="glossy-box"><span class="icon">2️⃣</span></div><span class="folder-name">Unidad 2</span></div>
-            <div class="folder-link" onclick="showSubmenu('menu-ind-u3')"><div class="glossy-box"><span class="icon">3️⃣</span></div><span class="folder-name">Unidad 3</span></div>
-            <div class="folder-link" onclick="showSubmenu('menu-ind-u4')"><div class="glossy-box"><span class="icon">4️⃣</span></div><span class="folder-name">Unidad 4</span></div>
+            <div class="folder-link" onclick="showSubmenu('menu-ind-u1')"><div class="glossy-box">1️⃣</div><span class="folder-name">Unidad 1</span></div>
+            <div class="folder-link" onclick="showSubmenu('menu-ind-u2')"><div class="glossy-box">2️⃣</div><span class="folder-name">Unidad 2</span></div>
+            <div class="folder-link" onclick="showSubmenu('menu-ind-u3')"><div class="glossy-box">3️⃣</div><span class="folder-name">Unidad 3</span></div>
+            <div class="folder-link" onclick="showSubmenu('menu-ind-u4')"><div class="glossy-box">4️⃣</div><span class="folder-name">Unidad 4</span></div>
         </div>
     </section>
 
     <section class="submenu-section" id="menu-ind-u1">
         <button class="btn-nav" onclick="goBack('menu-tareas-ind')">← Volver a Unidades</button>
         <div class="grid-container">
-            <div class="folder-link" onclick="openDoc('URL_ENSAYO')"><div class="glossy-box">✍️</div><span class="folder-name">Ensayo</span></div>
-            <div class="folder-link" onclick="openDoc('URL_SI')"><div class="glossy-box">🧠</div><span class="folder-name">Mapa Mental SI</span></div>
-            <div class="folder-link" onclick="openDoc('URL_CONV')"><div class="glossy-box">📏</div><span class="folder-name">10 Ejercicios Conv.</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1l2EJ9ZZwCA25am3EnK7X-bWUFPGdQDix/preview')"><div class="glossy-box">✍️</div><span class="folder-name">Ensayo</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1ZkQUBwZ0vIzofFQ6jyfcUy6tLVLv6p_6/preview')"><div class="glossy-box">🧠</div><span class="folder-name">Mapa Mental SI</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1sS-uMWPysFVXiRJYMGSXjWbd2C1Y1_Zz/preview')"><div class="glossy-box">📏</div><span class="folder-name">10 Ejercicios Conv.</span></div>
             <div class="folder-link" onclick="openDoc('URL_TRIG')"><div class="glossy-box">📐</div><span class="folder-name">Mapa Trigonométrico</span></div>
             <div class="folder-link" onclick="openDoc('URL_VECT')"><div class="glossy-box">📍</div><span class="folder-name">10 Ejercicios Vectores</span></div>
         </div>
     </section>
 
-    <section class="submenu-section" id="menu-ind-u2"><button class="btn-nav" onclick="goBack('menu-tareas-ind')">← Volver</button></section>
-    <section class="submenu-section" id="menu-ind-u3"><button class="btn-nav" onclick="goBack('menu-tareas-ind')">← Volver</button></section>
-    <section class="submenu-section" id="menu-ind-u4"><button class="btn-nav" onclick="goBack('menu-tareas-ind')">← Volver</button></section>
+    <section class="submenu-section" id="menu-ind-u2"><button class="btn-nav" onclick="goBack('menu-tareas-ind')">← Volver</button><div class="grid-container"></div></section>
+    <section class="submenu-section" id="menu-ind-u3"><button class="btn-nav" onclick="goBack('menu-tareas-ind')">← Volver</button><div class="grid-container"></div></section>
+    <section class="submenu-section" id="menu-ind-u4"><button class="btn-nav" onclick="goBack('menu-tareas-ind')">← Volver</button><div class="grid-container"></div></section>
 
     <section class="submenu-section" id="menu-tareas-grp">
         <button class="btn-nav" onclick="goBack('menu-root')">← Volver al Inicio</button>
@@ -166,10 +163,10 @@
         </div>
     </section>
 
-    <section class="submenu-section" id="menu-grp-u1"><button class="btn-nav" onclick="goBack('menu-tareas-grp')">← Volver</button></section>
-    <section class="submenu-section" id="menu-grp-u2"><button class="btn-nav" onclick="goBack('menu-tareas-grp')">← Volver</button></section>
-    <section class="submenu-section" id="menu-grp-u3"><button class="btn-nav" onclick="goBack('menu-tareas-grp')">← Volver</button></section>
-    <section class="submenu-section" id="menu-grp-u4"><button class="btn-nav" onclick="goBack('menu-tareas-grp')">← Volver</button></section>
+    <section class="submenu-section" id="menu-grp-u1"><button class="btn-nav" onclick="goBack('menu-tareas-grp')">← Volver</button><div class="grid-container"></div></section>
+    <section class="submenu-section" id="menu-grp-u2"><button class="btn-nav" onclick="goBack('menu-tareas-grp')">← Volver</button><div class="grid-container"></div></section>
+    <section class="submenu-section" id="menu-grp-u3"><button class="btn-nav" onclick="goBack('menu-tareas-grp')">← Volver</button><div class="grid-container"></div></section>
+    <section class="submenu-section" id="menu-grp-u4"><button class="btn-nav" onclick="goBack('menu-tareas-grp')">← Volver</button><div class="grid-container"></div></section>
 
     <section class="submenu-section" id="menu-centro">
         <button class="btn-nav" onclick="goBack('menu-root')">← Volver al Inicio</button>
@@ -182,10 +179,16 @@
     <section class="submenu-section" id="menu-p1">
         <button class="btn-nav" onclick="goBack('menu-centro')">← Volver a Prácticas</button>
         <div class="grid-container">
-            <div class="folder-link" onclick="openDoc('URL_INF')"><div class="glossy-box">📊</div><span class="folder-name">Informe</span></div>
-            <div class="folder-link" onclick="openDoc('URL_FUND')"><div class="glossy-box">📖</div><span class="folder-name">Fundamento</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1-LkIVhBW7brdRQ_H1me8bZNbLjSmsNdj/preview')">
+                <div class="glossy-box">📖</div><span class="folder-name">Fundamento P1</span>
+            </div>
+            <div class="folder-link" onclick="openDoc('URL_INFORME')">
+                <div class="glossy-box">📊</div><span class="folder-name">Informe P1</span>
+            </div>
         </div>
     </section>
+
+    <section class="submenu-section" id="menu-p2"><button class="btn-nav" onclick="goBack('menu-centro')">← Volver</button><div class="grid-container"></div></section>
 
     <section id="viewer-container">
         <button class="btn-nav" id="btn-cerrar-visor">← Cerrar Documento</button>
@@ -196,7 +199,6 @@
         let currentMenuId = 'menu-root';
 
         function showSubmenu(menuId) {
-            // Ocultar todo incluyendo el header cuando estemos en el visor (opcional)
             document.getElementById('menu-root').style.display = 'none';
             document.querySelectorAll('.submenu-section').forEach(s => s.style.display = 'none');
             document.getElementById('viewer-container').style.display = 'none';
