@@ -34,7 +34,7 @@
 
         /* Grid de Navegación */
         .grid-container {
-            display: flex; flex-wrap: wrap; justify-content: center; gap: 2.5rem; max-width: 1000px;
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; max-width: 1100px;
         }
 
         .folder-link {
@@ -45,7 +45,7 @@
         .folder-link:hover { transform: translateY(-10px) scale(1.05); }
 
         .glossy-box {
-            width: 120px; height: 120px; border-radius: 25px;
+            width: 110px; height: 110px; border-radius: 25px;
             background: linear-gradient(180deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.2) 49%, rgba(255,255,255,0.0) 50%, rgba(255,255,255,0.4) 100%);
             box-shadow: 0 10px 20px rgba(0, 119, 182, 0.2), inset 0 2px 3px rgba(255, 255, 255, 1);
             border: 1px solid rgba(255, 255, 255, 0.6); display: flex; justify-content: center; align-items: center;
@@ -58,18 +58,19 @@
             border-radius: 20px 20px 100px 100px; pointer-events: none;
         }
 
-        .glossy-box img, .glossy-box span.icon { width: 65%; height: 65%; object-fit: contain; z-index: 1; font-size: 3rem; display: flex; justify-content: center; align-items: center; }
+        .icon { font-size: 2.8rem; z-index: 1; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); }
+        .glossy-box img { width: 65%; height: 65%; object-fit: contain; z-index: 1; }
 
         .folder-name {
-            font-size: 0.95rem; font-weight: 600; color: #005682; text-align: center;
-            background: rgba(255,255,255,0.4); padding: 5px 15px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.5);
+            font-size: 0.9rem; font-weight: 600; color: #005682; text-align: center;
+            background: rgba(255,255,255,0.5); padding: 5px 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.5);
         }
 
         /* Secciones y Visor */
         .submenu-section, #viewer-container { display: none; width: 100%; flex-direction: column; align-items: center; }
 
         iframe {
-            width: 100%; height: 75vh; border-radius: 15px; border: 4px solid rgba(255, 255, 255, 0.8);
+            width: 100%; height: 80vh; border-radius: 15px; border: 4px solid rgba(255, 255, 255, 0.8);
             background: white; box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
 
@@ -89,7 +90,7 @@
     <header id="main-header">
         <h1>Universidad Central del Ecuador</h1>
         <div class="personal-info">
-            <span>Andrés Jumbo</span> | <span>5to Semestre</span> | <span>Física Aplicada</span>
+            Andrés Jumbo | 5to Semestre | Física Aplicada
         </div>
     </header>
 
@@ -104,9 +105,14 @@
             <span class="folder-name">Información Personal</span>
         </div>
 
-        <div class="folder-link" onclick="showSubmenu('menu-tareas')">
-            <div class="glossy-box"><img src="tareas.webp" alt="Tareas"></div>
+        <div class="folder-link" onclick="showSubmenu('menu-tareas-ind')">
+            <div class="glossy-box"><img src="tareas.webp" alt="Tareas Ind"></div>
             <span class="folder-name">Tareas Individuales</span>
+        </div>
+
+        <div class="folder-link" onclick="showSubmenu('menu-tareas-grp')">
+            <div class="glossy-box"><span class="icon">👥</span></div>
+            <span class="folder-name">Tareas Grupales</span>
         </div>
 
         <div class="folder-link" onclick="showSubmenu('menu-centro')">
@@ -119,7 +125,7 @@
         <button class="btn-nav" onclick="goBack('menu-root')">← Volver al Inicio</button>
         <div class="grid-container">
             <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1POJ5M3LCm76Xr4IzQrBj58eSOz2ND3CH/preview')">
-                <div class="glossy-box"><span class="icon">📄</span></div>
+                <div class="glossy-box"><span class="icon">👨‍🎓</span></div>
                 <span class="folder-name">Currículum</span>
             </div>
             <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/18byDHbYDa-ZRSJj4d4kjAO99r2SujT5q/preview')">
@@ -137,73 +143,63 @@
         </div>
     </section>
 
-    <section class="submenu-section" id="menu-tareas">
+    <section class="submenu-section" id="menu-tareas-ind">
         <button class="btn-nav" onclick="goBack('menu-root')">← Volver al Inicio</button>
         <div class="grid-container">
-            <div class="folder-link" onclick="showSubmenu('menu-u1')">
-                <div class="glossy-box"><span class="icon">1️⃣</span></div>
-                <span class="folder-name">Unidad 1</span>
-            </div>
-            <div class="folder-link" onclick="showSubmenu('menu-u2')">
-                <div class="glossy-box"><span class="icon">2️⃣</span></div>
-                <span class="folder-name">Unidad 2</span>
-            </div>
+            <div class="folder-link" onclick="showSubmenu('menu-ind-u1')"><div class="glossy-box"><span class="icon">1️⃣</span></div><span class="folder-name">Unidad 1</span></div>
+            <div class="folder-link" onclick="showSubmenu('menu-ind-u2')"><div class="glossy-box"><span class="icon">2️⃣</span></div><span class="folder-name">Unidad 2</span></div>
+            <div class="folder-link" onclick="showSubmenu('menu-ind-u3')"><div class="glossy-box"><span class="icon">3️⃣</span></div><span class="folder-name">Unidad 3</span></div>
+            <div class="folder-link" onclick="showSubmenu('menu-ind-u4')"><div class="glossy-box"><span class="icon">4️⃣</span></div><span class="folder-name">Unidad 4</span></div>
         </div>
     </section>
 
-    <section class="submenu-section" id="menu-u1">
-        <button class="btn-nav" onclick="goBack('menu-tareas')">← Volver a Unidades</button>
+    <section class="submenu-section" id="menu-tareas-grp">
+        <button class="btn-nav" onclick="goBack('menu-root')">← Volver al Inicio</button>
         <div class="grid-container">
-            <div class="folder-link" onclick="openDoc('URL_TAREA_1_U1')">
-                <div class="glossy-box"><span class="icon">📓</span></div>
-                <span class="folder-name">Tarea 1</span>
-            </div>
+            <div class="folder-link" onclick="showSubmenu('menu-grp-u1')"><div class="glossy-box"><span class="icon">📂</span></div><span class="folder-name">Grupales U1</span></div>
+            <div class="folder-link" onclick="showSubmenu('menu-grp-u2')"><div class="glossy-box"><span class="icon">📂</span></div><span class="folder-name">Grupales U2</span></div>
+            <div class="folder-link" onclick="showSubmenu('menu-grp-u3')"><div class="glossy-box"><span class="icon">📂</span></div><span class="folder-name">Grupales U3</span></div>
+            <div class="folder-link" onclick="showSubmenu('menu-grp-u4')"><div class="glossy-box"><span class="icon">📂</span></div><span class="folder-name">Grupales U4</span></div>
+        </div>
+    </section>
+
+    <section class="submenu-section" id="menu-ind-u1">
+        <button class="btn-nav" onclick="goBack('menu-tareas-ind')">← Volver a Unidades</button>
+        <div class="grid-container">
+            <div class="folder-link" onclick="openDoc('URL_TAREA_1')"><div class="glossy-box"><span class="icon">📘</span></div><span class="folder-name">Tarea 1</span></div>
         </div>
     </section>
 
     <section class="submenu-section" id="menu-centro">
         <button class="btn-nav" onclick="goBack('menu-root')">← Volver al Inicio</button>
         <div class="grid-container">
-            <div class="folder-link" onclick="showSubmenu('menu-p1')">
-                <div class="glossy-box"><span class="icon">🔬</span></div>
-                <span class="folder-name">Práctica 1</span>
-            </div>
-            <div class="folder-link" onclick="showSubmenu('menu-p2')">
-                <div class="glossy-box"><span class="icon">🔬</span></div>
-                <span class="folder-name">Práctica 2</span>
-            </div>
+            <div class="folder-link" onclick="showSubmenu('menu-p1')"><div class="glossy-box"><span class="icon">🔬</span></div><span class="folder-name">Práctica 1</span></div>
+            <div class="folder-link" onclick="showSubmenu('menu-p2')"><div class="glossy-box"><span class="icon">🔬</span></div><span class="folder-name">Práctica 2</span></div>
         </div>
     </section>
 
     <section class="submenu-section" id="menu-p1">
         <button class="btn-nav" onclick="goBack('menu-centro')">← Volver a Prácticas</button>
         <div class="grid-container">
-            <div class="folder-link" onclick="openDoc('URL_INFORME_P1')">
-                <div class="glossy-box"><span class="icon">📘</span></div>
-                <span class="folder-name">Informe</span>
-            </div>
-            <div class="folder-link" onclick="openDoc('URL_FUNDAMENTO_P1')">
-                <div class="glossy-box"><span class="icon">📖</span></div>
-                <span class="folder-name">Fundamento</span>
-            </div>
+            <div class="folder-link" onclick="openDoc('URL_INFORME')"><div class="glossy-box"><span class="icon">📊</span></div><span class="folder-name">Informe</span></div>
+            <div class="folder-link" onclick="openDoc('URL_FUNDAMENTO')"><div class="glossy-box"><span class="icon">📖</span></div><span class="folder-name">Fundamento</span></div>
         </div>
     </section>
 
     <section id="viewer-container">
         <button class="btn-nav" id="btn-cerrar-visor">← Cerrar Documento</button>
-        <iframe id="doc-iframe" src="" frameborder="0"></iframe>
+        <iframe id="doc-iframe" src=""></iframe>
     </section>
 
     <script>
         let currentMenuId = 'menu-root';
 
         function showSubmenu(menuId) {
-            // Ocultar todo
             document.getElementById('menu-root').style.display = 'none';
             document.querySelectorAll('.submenu-section').forEach(s => s.style.display = 'none');
             document.getElementById('viewer-container').style.display = 'none';
+            document.getElementById('main-header').style.display = 'block';
             
-            // Mostrar el elegido
             document.getElementById(menuId).style.display = 'flex';
             currentMenuId = menuId;
             window.scrollTo(0, 0);
@@ -214,23 +210,21 @@
         }
 
         function openDoc(url) {
-            // Ocultar menús y mostrar visor
-            document.getElementById('menu-root').style.display = 'none';
-            document.querySelectorAll('.submenu-section').forEach(s => s.style.display = 'none');
+            document.getElementById('main-header').style.display = 'none';
+            document.querySelectorAll('main, .submenu-section').forEach(el => el.style.display = 'none');
             
             const viewer = document.getElementById('viewer-container');
             viewer.style.display = 'flex';
             document.getElementById('doc-iframe').src = url;
 
-            // Al cerrar, vuelve al menú donde estabas parado
             document.getElementById('btn-cerrar-visor').onclick = function() {
                 viewer.style.display = 'none';
+                document.getElementById('main-header').style.display = 'block';
                 document.getElementById(currentMenuId).style.display = 'flex';
                 document.getElementById('doc-iframe').src = "";
             };
             window.scrollTo(0, 0);
         }
     </script>
-
 </body>
 </html>
