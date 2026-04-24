@@ -13,10 +13,9 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        /* Fondo estilo Frutiger Aero */
         body {
             background: linear-gradient(135deg, rgba(161, 223, 251, 0.4) 0%, rgba(212, 240, 255, 0.4) 50%, rgba(137, 207, 240, 0.4) 100%), 
-                        url('fondo.jpg');
+                        url('fondo.jpg'); 
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
@@ -29,7 +28,6 @@
             padding: 2rem;
         }
 
-        /* Encabezado con efecto cristal */
         header {
             background: rgba(255, 255, 255, 0.45);
             backdrop-filter: blur(12px);
@@ -45,26 +43,9 @@
             margin-bottom: 3rem;
         }
 
-        header h1 {
-            font-size: 1.8rem;
-            color: #005682;
-            text-shadow: 1px 1px 3px rgba(255,255,255,0.8);
-            margin-bottom: 0.5rem;
-        }
-
-        header h2 {
-            font-size: 1.2rem;
-            font-weight: 500;
-            color: #0077b6;
-            margin-bottom: 0.2rem;
-        }
-
-        header h3 {
-            font-size: 1.1rem;
-            font-weight: 400;
-            color: #0096c7;
-            margin-bottom: 1.5rem;
-        }
+        header h1 { font-size: 1.8rem; color: #005682; margin-bottom: 0.5rem; }
+        header h2 { font-size: 1.2rem; color: #0077b6; margin-bottom: 0.2rem; }
+        header h3 { font-size: 1.1rem; color: #0096c7; margin-bottom: 1.5rem; }
 
         .personal-info {
             display: inline-block;
@@ -72,13 +53,8 @@
             padding: 10px 25px;
             border-radius: 50px;
             border: 1px solid rgba(255,255,255,0.9);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
             font-weight: bold;
             color: #023e8a;
-        }
-
-        .personal-info span {
-            margin: 0 10px;
         }
 
         /* Contenedor de las carpetas */
@@ -90,7 +66,6 @@
             max-width: 1000px;
         }
 
-        /* Botones Glossy */
         .folder-link {
             display: flex;
             flex-direction: column;
@@ -98,23 +73,18 @@
             text-decoration: none;
             transition: all 0.3s ease;
             width: 160px;
+            cursor: pointer;
         }
 
-        .folder-link:hover {
-            transform: translateY(-10px) scale(1.05);
-        }
+        .folder-link:hover { transform: translateY(-10px) scale(1.05); }
 
         .glossy-box {
             width: 120px;
             height: 120px;
             border-radius: 25px;
             background: linear-gradient(180deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.2) 49%, rgba(255,255,255,0.0) 50%, rgba(255,255,255,0.4) 100%);
-            box-shadow: 
-                0 10px 20px rgba(0, 119, 182, 0.2),
-                inset 0 2px 3px rgba(255, 255, 255, 1),
-                inset 0 -2px 5px rgba(0, 119, 182, 0.3);
+            box-shadow: 0 10px 20px rgba(0, 119, 182, 0.2), inset 0 2px 3px rgba(255, 255, 255, 1);
             border: 1px solid rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(5px);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -126,86 +96,125 @@
         .glossy-box::after {
             content: '';
             position: absolute;
-            top: 2%; left: 5%;
-            width: 90%; height: 45%;
+            top: 2%; left: 5%; width: 90%; height: 45%;
             background: linear-gradient(180deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.1) 100%);
             border-radius: 20px 20px 100px 100px;
             pointer-events: none;
         }
 
-        .glossy-box img {
-            width: 65%;
-            height: 65%;
-            object-fit: contain;
-            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
-            z-index: 1;
-        }
+        .glossy-box img { width: 65%; height: 65%; object-fit: contain; z-index: 1; }
 
         .folder-name {
-            font-size: 1rem;
-            font-weight: 600;
-            color: #005682;
-            text-align: center;
-            text-shadow: 1px 1px 2px rgba(255,255,255,0.9);
-            background: rgba(255,255,255,0.4);
-            padding: 5px 15px;
-            border-radius: 15px;
-            border: 1px solid rgba(255,255,255,0.5);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            font-size: 1rem; font-weight: 600; color: #005682; text-align: center;
+            background: rgba(255,255,255,0.4); padding: 5px 15px; border-radius: 15px;
         }
+
+        /* --- Visor de Documentos --- */
+        #viewer-container {
+            display: none;
+            width: 100%;
+            max-width: 1000px;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        iframe {
+            width: 100%;
+            height: 75vh;
+            border-radius: 15px;
+            border: 4px solid rgba(255, 255, 255, 0.6);
+            background: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .btn-back {
+            margin-bottom: 20px;
+            padding: 12px 30px;
+            background: linear-gradient(180deg, #4cc9f0 0%, #4361ee 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
+            font-size: 1rem;
+        }
+
+        .btn-back:hover { transform: scale(1.05); filter: brightness(1.1); }
 
     </style>
 </head>
 <body>
 
-    <header>
+    <header id="main-header">
         <h1>Universidad Central del Ecuador</h1>
         <h2>Facultad de Filosofía, Letras y Ciencias de la Educación</h2>
         <h3>Pedagogía de las Ciencias Experimentales Informática</h3>
         
         <div class="personal-info">
-            <span>Andrés Jumbo</span> | 
-            <span>5to Semestre</span> | 
-            <span>Física Aplicada</span>
+            <span>Andrés Jumbo</span> | <span>5to Semestre</span> | <span>Física Aplicada</span>
         </div>
     </header>
 
-    <main class="grid-container">
-        <a href="https://drive.google.com/file/d/1HCCZZDh-3TmtHITPpE0YiHl8eUbq9Pgg/preview" target="_blank" class="folder-link">
+    <main class="grid-container" id="folder-grid">
+        <div class="folder-link" onclick="showDoc('https://drive.google.com/embeddedfolderview?id=1HCCZZDh-3TmtHITPpE0YiHl8eUbq9Pgg#list')">
             <div class="glossy-box">
                 <img src="silabo.jpg" alt="Icono Sílabo">
             </div>
             <span class="folder-name">Sílabo</span>
-        </a>
+        </div>
 
-        <a href="https://drive.google.com/file/d/1a83z9ZR0w2kIdfg8-1TQFTdEvGQ1Oo3d/preview" target="_blank" class="folder-link">
+        <div class="folder-link" onclick="showDoc('https://drive.google.com/embeddedfolderview?id=1a83z9ZR0w2kIdfg8-1TQFTdEvGQ1Oo3d#list')">
             <div class="glossy-box">
                 <img src="personal.png" alt="Icono Información">
             </div>
             <span class="folder-name">Información Personal</span>
-        </a>
+        </div>
 
-        <a href="https://drive.google.com/file/d/1d_qy1ekySy0vd5F8oWTYizhkQ0E5K3XE/preview" target="_blank" class="folder-link">
+        <div class="folder-link" onclick="showDoc('https://drive.google.com/embeddedfolderview?id=1d_qy1ekySy0vd5F8oWTYizhkQ0E5K3XE#list')">
             <div class="glossy-box">
                 <img src="tareas.webp" alt="Icono Tareas">
             </div>
             <span class="folder-name">Tareas</span>
-        </a>
+        </div>
 
-        <a href="https://drive.google.com/file/d/1egO42WSd4rjQnrtDHt8KJ0OR0SWEJffv/preview" target="_blank" class="folder-link">
+        <div class="folder-link" onclick="showDoc('https://drive.google.com/embeddedfolderview?id=1egO42WSd4rjQnrtDHt8KJ0OR0SWEJffv#list')">
             <div class="glossy-box">
                 <img src="grpal.avif" alt="Icono Grupales">
             </div>
             <span class="folder-name">Tareas Grupales</span>
-        </a>
+        </div>
 
-        <a href="https://drive.google.com/file/d/11TtmBMVXQ8QI19hQ1d5L-Meyk_uAOSLY/preview" target="_blank" class="folder-link">
+        <div class="folder-link" onclick="showDoc('https://drive.google.com/embeddedfolderview?id=11TtmBMVXQ8QI19hQ1d5L-Meyk_uAOSLY#list')">
             <div class="glossy-box">
                 <img src="centro.jpg" alt="Icono Centro Física">
             </div>
             <span class="folder-name">Grupales del Centro de Física</span>
-        </a>
+        </div>
     </main>
+
+    <section id="viewer-container">
+        <button class="btn-back" onclick="hideDoc()">← Volver al Menú Principal</button>
+        <iframe id="doc-iframe" src="" frameborder="0"></iframe>
+    </section>
+
+    <script>
+        function showDoc(url) {
+            document.getElementById('main-header').style.display = 'none';
+            document.getElementById('folder-grid').style.display = 'none';
+            const container = document.getElementById('viewer-container');
+            container.style.display = 'flex';
+            document.getElementById('doc-iframe').src = url;
+            window.scrollTo(0, 0);
+        }
+
+        function hideDoc() {
+            document.getElementById('main-header').style.display = 'block';
+            document.getElementById('folder-grid').style.display = 'flex';
+            document.getElementById('viewer-container').style.display = 'none';
+            document.getElementById('doc-iframe').src = "";
+        }
+    </script>
 
 </body>
 </html>
