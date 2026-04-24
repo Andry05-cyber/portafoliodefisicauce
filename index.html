@@ -15,7 +15,7 @@
             min-height: 100vh; color: #1a4a5e; display: flex; flex-direction: column; align-items: center; padding: 2rem;
         }
 
-        /* Cristal de fondo (Glassmorphism) */
+        /* Cristal de fondo */
         header, .submenu-card {
             background: rgba(255, 255, 255, 0.45);
             backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
@@ -32,7 +32,7 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.05); font-weight: bold; color: #023e8a; margin-top: 15px;
         }
 
-        /* Contenedores de botones */
+        /* Contenedores */
         .grid-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; max-width: 1100px; width: 100%; }
 
         .folder-link {
@@ -64,7 +64,7 @@
             background: rgba(255,255,255,0.5); padding: 5px 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.5);
         }
 
-        /* Navegación y Visor */
+        /* Estilos de navegación y visor */
         .submenu-section, #viewer-container { display: none; width: 100%; flex-direction: column; align-items: center; }
 
         iframe {
@@ -144,27 +144,17 @@
     <section class="submenu-section" id="menu-ind-u1">
         <button class="btn-nav" onclick="goBack('menu-tareas-ind')">← Volver a Unidades</button>
         <div class="grid-container">
-            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1l2EJ9ZZwCA25am3EnK7X-bWUFPGdQDix/preview')">
-                <div class="glossy-box">✍️</div><span class="folder-name">Ensayo</span>
-            </div>
-            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1ZkQUBwZ0vIzofFQ6jyfcUy6tLVLv6p_6/preview')">
-                <div class="glossy-box">🧠</div><span class="folder-name">Mapa Mental SI</span>
-            </div>
-            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1sS-uMWPysFVXiRJYMGSXjWbd2C1Y1_Zz/preview')">
-                <div class="glossy-box">📏</div><span class="folder-name">10 Ejercicios Conv.</span>
-            </div>
-            <div class="folder-link" onclick="openDoc('URL_MAPA_TRIG')">
-                <div class="glossy-box">📐</div><span class="folder-name">Mapa Trigonométrico</span>
-            </div>
-            <div class="folder-link" onclick="openDoc('URL_EJER_VECTORES')">
-                <div class="glossy-box">📍</div><span class="folder-name">10 Ejercicios Vectores</span>
-            </div>
+            <div class="folder-link" onclick="openDoc('URL_ENSAYO')"><div class="glossy-box">✍️</div><span class="folder-name">Ensayo</span></div>
+            <div class="folder-link" onclick="openDoc('URL_SI')"><div class="glossy-box">🧠</div><span class="folder-name">Mapa Mental SI</span></div>
+            <div class="folder-link" onclick="openDoc('URL_CONV')"><div class="glossy-box">📏</div><span class="folder-name">10 Ejercicios Conv.</span></div>
+            <div class="folder-link" onclick="openDoc('URL_TRIG')"><div class="glossy-box">📐</div><span class="folder-name">Mapa Trigonométrico</span></div>
+            <div class="folder-link" onclick="openDoc('URL_VECT')"><div class="glossy-box">📍</div><span class="folder-name">10 Ejercicios Vectores</span></div>
         </div>
     </section>
 
-    <section class="submenu-section" id="menu-ind-u2"><button class="btn-nav" onclick="goBack('menu-tareas-ind')">← Volver</button><div class="grid-container"></div></section>
-    <section class="submenu-section" id="menu-ind-u3"><button class="btn-nav" onclick="goBack('menu-tareas-ind')">← Volver</button><div class="grid-container"></div></section>
-    <section class="submenu-section" id="menu-ind-u4"><button class="btn-nav" onclick="goBack('menu-tareas-ind')">← Volver</button><div class="grid-container"></div></section>
+    <section class="submenu-section" id="menu-ind-u2"><button class="btn-nav" onclick="goBack('menu-tareas-ind')">← Volver</button></section>
+    <section class="submenu-section" id="menu-ind-u3"><button class="btn-nav" onclick="goBack('menu-tareas-ind')">← Volver</button></section>
+    <section class="submenu-section" id="menu-ind-u4"><button class="btn-nav" onclick="goBack('menu-tareas-ind')">← Volver</button></section>
 
     <section class="submenu-section" id="menu-tareas-grp">
         <button class="btn-nav" onclick="goBack('menu-root')">← Volver al Inicio</button>
@@ -192,8 +182,8 @@
     <section class="submenu-section" id="menu-p1">
         <button class="btn-nav" onclick="goBack('menu-centro')">← Volver a Prácticas</button>
         <div class="grid-container">
-            <div class="folder-link" onclick="openDoc('URL_INFORME')"><div class="glossy-box">📊</div><span class="folder-name">Informe</span></div>
-            <div class="folder-link" onclick="openDoc('URL_FUNDAMENTO')"><div class="glossy-box">📖</div><span class="folder-name">Fundamento</span></div>
+            <div class="folder-link" onclick="openDoc('URL_INF')"><div class="glossy-box">📊</div><span class="folder-name">Informe</span></div>
+            <div class="folder-link" onclick="openDoc('URL_FUND')"><div class="glossy-box">📖</div><span class="folder-name">Fundamento</span></div>
         </div>
     </section>
 
@@ -206,6 +196,7 @@
         let currentMenuId = 'menu-root';
 
         function showSubmenu(menuId) {
+            // Ocultar todo incluyendo el header cuando estemos en el visor (opcional)
             document.getElementById('menu-root').style.display = 'none';
             document.querySelectorAll('.submenu-section').forEach(s => s.style.display = 'none');
             document.getElementById('viewer-container').style.display = 'none';
