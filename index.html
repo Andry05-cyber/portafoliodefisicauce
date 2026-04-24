@@ -101,7 +101,7 @@
         <div class="folder-link" onclick="showSubmenu('menu-centro')">
             <div class="glossy-box">🔬</div><span class="folder-name">Centro de Física</span>
         </div>
-        <div class="folder-link" onclick="showSubmenu('menu-glosario')">
+        <div class="folder-link" onclick="openDoc('URL_DE_TU_GLOSARIO')">
             <div class="glossy-box">📖</div><span class="folder-name">Glosario</span>
         </div>
     </main>
@@ -132,10 +132,11 @@
             <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1l2EJ9ZZwCA25am3EnK7X-bWUFPGdQDix/preview')"><div class="glossy-box">✍️</div><span class="folder-name">Ensayo</span></div>
             <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1ZkQUBwZ0vIzofFQ6jyfcUy6tLVLv6p_6/preview')"><div class="glossy-box">🧠</div><span class="folder-name">Mapa Mental SI</span></div>
             <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1sS-uMWPysFVXiRJYMGSXjWbd2C1Y1_Zz/preview')"><div class="glossy-box">📏</div><span class="folder-name">10 Ejercicios Conv.</span></div>
-            <div class="folder-link" onclick="openDoc('URL_TRIG')"><div class="glossy-box">📐</div><span class="folder-name">Mapa Trigonométrico</span></div>
-            <div class="folder-link" onclick="openDoc('URL_VECT')"><div class="glossy-box">📍</div><span class="folder-name">10 Ejercicios Vectores</span></div>
         </div>
     </section>
+    <section class="submenu-section" id="menu-ind-u2"><button class="btn-nav" onclick="goBack('menu-tareas-ind')">← Volver a Unidades</button><div class="grid-container"></div></section>
+    <section class="submenu-section" id="menu-ind-u3"><button class="btn-nav" onclick="goBack('menu-tareas-ind')">← Volver a Unidades</button><div class="grid-container"></div></section>
+    <section class="submenu-section" id="menu-ind-u4"><button class="btn-nav" onclick="goBack('menu-tareas-ind')">← Volver a Unidades</button><div class="grid-container"></div></section>
 
     <section class="submenu-section" id="menu-tareas-grp">
         <button class="btn-nav" onclick="goBack('menu-root')">← Volver al Inicio</button>
@@ -146,6 +147,11 @@
             <div class="folder-link" onclick="showSubmenu('menu-grp-u4')"><div class="glossy-box">📂</div><span class="folder-name">Unidad 4</span></div>
         </div>
     </section>
+
+    <section class="submenu-section" id="menu-grp-u1"><button class="btn-nav" onclick="goBack('menu-tareas-grp')">← Volver a Unidades</button><div class="grid-container"></div></section>
+    <section class="submenu-section" id="menu-grp-u2"><button class="btn-nav" onclick="goBack('menu-tareas-grp')">← Volver a Unidades</button><div class="grid-container"></div></section>
+    <section class="submenu-section" id="menu-grp-u3"><button class="btn-nav" onclick="goBack('menu-tareas-grp')">← Volver a Unidades</button><div class="grid-container"></div></section>
+    <section class="submenu-section" id="menu-grp-u4"><button class="btn-nav" onclick="goBack('menu-tareas-grp')">← Volver a Unidades</button><div class="grid-container"></div></section>
 
     <section class="submenu-section" id="menu-centro">
         <button class="btn-nav" onclick="goBack('menu-root')">← Volver al Inicio</button>
@@ -171,14 +177,6 @@
         </div>
     </section>
 
-    <section class="submenu-section" id="menu-glosario">
-        <button class="btn-nav" onclick="goBack('menu-root')">← Volver al Inicio</button>
-        <div class="grid-container">
-            <div class="folder-link" onclick="openDoc('URL_GLOSARIO_U1')"><div class="glossy-box">📘</div><span class="folder-name">Glosario U1</span></div>
-            <div class="folder-link" onclick="openDoc('URL_GLOSARIO_U2')"><div class="glossy-box">📘</div><span class="folder-name">Glosario U2</span></div>
-        </div>
-    </section>
-
     <section id="viewer-container">
         <button class="btn-nav" id="btn-cerrar-visor">← Cerrar Documento</button>
         <iframe id="doc-iframe" src=""></iframe>
@@ -192,7 +190,6 @@
             document.querySelectorAll('.submenu-section').forEach(s => s.style.display = 'none');
             document.getElementById('viewer-container').style.display = 'none';
             document.getElementById('main-header').style.display = 'block';
-
             const target = document.getElementById(menuId);
             if(target) { target.style.display = 'flex'; currentMenuId = menuId; }
             window.scrollTo(0, 0);
@@ -205,7 +202,6 @@
             document.querySelectorAll('main, .submenu-section').forEach(el => el.style.display = 'none');
             document.getElementById('viewer-container').style.display = 'flex';
             document.getElementById('doc-iframe').src = url;
-
             document.getElementById('btn-cerrar-visor').onclick = function() {
                 document.getElementById('viewer-container').style.display = 'none';
                 document.getElementById('main-header').style.display = 'block';
