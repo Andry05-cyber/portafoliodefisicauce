@@ -102,7 +102,7 @@
         <div class="folder-link" onclick="showSubmenu('menu-ensayos')">
             <div class="glossy-box">✒️</div><span class="folder-name">Ensayos</span>
         </div>
-        <div class="folder-link" onclick="openDoc('URL_TAREA_GRUPAL')">
+        <div class="folder-link" onclick="showSubmenu('menu-tareas-grup')">
             <div class="glossy-box">👥</div><span class="folder-name">Tareas Grupales</span>
         </div>
         <div class="folder-link" onclick="showSubmenu('menu-centro')">
@@ -113,6 +113,7 @@
         </div>
     </main>
 
+    <!-- SUBMENÚ: INFORMACIÓN PERSONAL -->
     <section class="submenu-section" id="menu-info">
         <button class="btn-nav" onclick="goBack('menu-root')">← Volver al Inicio</button>
         <div class="grid-container">
@@ -123,6 +124,7 @@
         </div>
     </section>
 
+    <!-- SUBMENÚ: ENSAYOS -->
     <section class="submenu-section" id="menu-ensayos">
         <button class="btn-nav" onclick="goBack('menu-root')">← Volver al Inicio</button>
         <div class="grid-container">
@@ -133,6 +135,7 @@
         </div>
     </section>
 
+    <!-- SUBMENÚ: ENSAYO DEL LIBRO -->
     <section class="submenu-section" id="menu-ensayo-libro">
         <button class="btn-nav" onclick="goBack('menu-ensayos')">← Volver a Ensayos</button>
         <div class="grid-container">
@@ -144,6 +147,16 @@
         </div>
     </section>
 
+    <!-- SUBMENÚ: TAREAS GRUPALES -->
+    <section class="submenu-section" id="menu-tareas-grup">
+        <button class="btn-nav" onclick="goBack('menu-root')">← Volver al Inicio</button>
+        <div class="grid-container">
+            <div class="folder-link" onclick="openDoc('URL_TAREA_GRUPAL_DIGITAL')"><div class="glossy-box">💻</div><span class="folder-name">Fundamento Digital</span></div>
+            <div class="folder-link" onclick="openDoc('URL_TAREA_GRUPAL_ESCRITO')"><div class="glossy-box">📝</div><span class="folder-name">Fundamento Escrito</span></div>
+        </div>
+    </section>
+
+    <!-- SUBMENÚ: TAREAS INDIVIDUALES (UNIDADES) -->
     <section class="submenu-section" id="menu-tareas-ind">
         <button class="btn-nav" onclick="goBack('menu-root')">← Volver al Inicio</button>
         <div class="grid-container">
@@ -154,6 +167,7 @@
         </div>
     </section>
 
+    <!-- TAREAS INDIVIDUALES: UNIDAD 1 -->
     <section class="submenu-section" id="menu-ind-u1">
         <button class="btn-nav" onclick="goBack('menu-tareas-ind')">← Volver a Unidades</button>
         <div class="grid-container">
@@ -169,6 +183,7 @@
         </div>
     </section>
     
+    <!-- TAREAS INDIVIDUALES: UNIDAD 2 -->
     <section class="submenu-section" id="menu-ind-u2">
         <button class="btn-nav" onclick="goBack('menu-tareas-ind')">← Volver a Unidades</button>
         <div class="grid-container">
@@ -181,6 +196,7 @@
         </div>
     </section>
     
+    <!-- TAREAS INDIVIDUALES: UNIDAD 3 -->
     <section class="submenu-section" id="menu-ind-u3">
         <button class="btn-nav" onclick="goBack('menu-tareas-ind')">← Volver a Unidades</button>
         <div class="grid-container">
@@ -189,6 +205,7 @@
         </div>
     </section>
     
+    <!-- TAREAS INDIVIDUALES: UNIDAD 4 -->
     <section class="submenu-section" id="menu-ind-u4">
         <button class="btn-nav" onclick="goBack('menu-tareas-ind')">← Volver a Unidades</button>
         <div class="grid-container">
@@ -196,19 +213,28 @@
         </div>
     </section>
 
+    <!-- SUBMENÚ PRINCIPAL: CENTRO DE FÍSICA -->
     <section class="submenu-section" id="menu-centro">
         <button class="btn-nav" onclick="goBack('menu-root')">← Volver al Inicio</button>
         <div class="grid-container">
             <div class="folder-link" onclick="showSubmenu('menu-p1')"><div class="glossy-box">🔬</div><span class="folder-name">Práctica 1</span></div>
             <div class="folder-link" onclick="showSubmenu('menu-p2')"><div class="glossy-box">🔬</div><span class="folder-name">Práctica 2</span></div>
+            <div class="folder-link" onclick="showSubmenu('menu-p3')"><div class="glossy-box">🔬</div><span class="folder-name">Práctica 3</span></div>
+            <div class="folder-link" onclick="showSubmenu('menu-p4')"><div class="glossy-box">🔬</div><span class="folder-name">Práctica 4</span></div>
+            <div class="folder-link" onclick="showSubmenu('menu-p5')"><div class="glossy-box">🔬</div><span class="folder-name">Práctica 5</span></div>
+            <div class="folder-link" onclick="showSubmenu('menu-p6')"><div class="glossy-box">🔬</div><span class="folder-name">Práctica 6</span></div>
+            <div class="folder-link" onclick="showSubmenu('menu-p7')"><div class="glossy-box">🔬</div><span class="folder-name">Práctica 7</span></div>
+            <div class="folder-link" onclick="showSubmenu('menu-p8')"><div class="glossy-box">🔬</div><span class="folder-name">Práctica 8</span></div>
         </div>
     </section>
 
+    <!-- CONTENIDOS DETALLADOS DE CADA PRÁCTICA (1 al 8) -->
     <section class="submenu-section" id="menu-p1">
         <button class="btn-nav" onclick="goBack('menu-centro')">← Volver a Prácticas</button>
         <div class="grid-container">
             <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1-LkIVhBW7brdRQ_H1me8bZNbLjSmsNdj/preview')"><div class="glossy-box">📖</div><span class="folder-name">Fundamento P1</span></div>
             <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1HjMLn-AqoyNil-xL5xeQcbQjFObgdgaV/preview')"><div class="glossy-box">📊</div><span class="folder-name">Informe P1</span></div>
+            <div class="folder-link" onclick="openDoc('URL_P1_PRUEBA')"><div class="glossy-box">📝</div><span class="folder-name">Prueba P1</span></div>
         </div>
     </section>
 
@@ -217,9 +243,65 @@
         <div class="grid-container">
             <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1MPkjDflHibXJR-QxoSs--Soz8L1q71zN/preview')"><div class="glossy-box">📖</div><span class="folder-name">Fundamento P2</span></div>
             <div class="folder-link" onclick="openDoc('URL_INFORME_P2')"><div class="glossy-box">📊</div><span class="folder-name">Informe P2</span></div>
+            <div class="folder-link" onclick="openDoc('URL_P2_PRUEBA')"><div class="glossy-box">📝</div><span class="folder-name">Prueba P2</span></div>
         </div>
     </section>
 
+    <section class="submenu-section" id="menu-p3">
+        <button class="btn-nav" onclick="goBack('menu-centro')">← Volver a Prácticas</button>
+        <div class="grid-container">
+            <div class="folder-link" onclick="openDoc('URL_P3_FUNDAMENTO')"><div class="glossy-box">📖</div><span class="folder-name">Fundamento P3</span></div>
+            <div class="folder-link" onclick="openDoc('URL_P3_INFORME')"><div class="glossy-box">📊</div><span class="folder-name">Informe P3</span></div>
+            <div class="folder-link" onclick="openDoc('URL_P3_PRUEBA')"><div class="glossy-box">📝</div><span class="folder-name">Prueba P3</span></div>
+        </div>
+    </section>
+
+    <section class="submenu-section" id="menu-p4">
+        <button class="btn-nav" onclick="goBack('menu-centro')">← Volver a Prácticas</button>
+        <div class="grid-container">
+            <div class="folder-link" onclick="openDoc('URL_P4_FUNDAMENTO')"><div class="glossy-box">📖</div><span class="folder-name">Fundamento P4</span></div>
+            <div class="folder-link" onclick="openDoc('URL_P4_INFORME')"><div class="glossy-box">📊</div><span class="folder-name">Informe P4</span></div>
+            <div class="folder-link" onclick="openDoc('URL_P4_PRUEBA')"><div class="glossy-box">📝</div><span class="folder-name">Prueba P4</span></div>
+        </div>
+    </section>
+
+    <section class="submenu-section" id="menu-p5">
+        <button class="btn-nav" onclick="goBack('menu-centro')">← Volver a Prácticas</button>
+        <div class="grid-container">
+            <div class="folder-link" onclick="openDoc('URL_P5_FUNDAMENTO')"><div class="glossy-box">📖</div><span class="folder-name">Fundamento P5</span></div>
+            <div class="folder-link" onclick="openDoc('URL_P5_INFORME')"><div class="glossy-box">📊</div><span class="folder-name">Informe P5</span></div>
+            <div class="folder-link" onclick="openDoc('URL_P5_PRUEBA')"><div class="glossy-box">📝</div><span class="folder-name">Prueba P5</span></div>
+        </div>
+    </section>
+
+    <section class="submenu-section" id="menu-p6">
+        <button class="btn-nav" onclick="goBack('menu-centro')">← Volver a Prácticas</button>
+        <div class="grid-container">
+            <div class="folder-link" onclick="openDoc('URL_P6_FUNDAMENTO')"><div class="glossy-box">📖</div><span class="folder-name">Fundamento P6</span></div>
+            <div class="folder-link" onclick="openDoc('URL_P6_INFORME')"><div class="glossy-box">📊</div><span class="folder-name">Informe P6</span></div>
+            <div class="folder-link" onclick="openDoc('URL_P6_PRUEBA')"><div class="glossy-box">📝</div><span class="folder-name">Prueba P6</span></div>
+        </div>
+    </section>
+
+    <section class="submenu-section" id="menu-p7">
+        <button class="btn-nav" onclick="goBack('menu-centro')">← Volver a Prácticas</button>
+        <div class="grid-container">
+            <div class="folder-link" onclick="openDoc('URL_P7_FUNDAMENTO')"><div class="glossy-box">📖</div><span class="folder-name">Fundamento P7</span></div>
+            <div class="folder-link" onclick="openDoc('URL_P7_INFORME')"><div class="glossy-box">📊</div><span class="folder-name">Informe P7</span></div>
+            <div class="folder-link" onclick="openDoc('URL_P7_PRUEBA')"><div class="glossy-box">📝</div><span class="folder-name">Prueba P7</span></div>
+        </div>
+    </section>
+
+    <section class="submenu-section" id="menu-p8">
+        <button class="btn-nav" onclick="goBack('menu-centro')">← Volver a Prácticas</button>
+        <div class="grid-container">
+            <div class="folder-link" onclick="openDoc('URL_P8_FUNDAMENTO')"><div class="glossy-box">📖</div><span class="folder-name">Fundamento P8</span></div>
+            <div class="folder-link" onclick="openDoc('URL_P8_INFORME')"><div class="glossy-box">📊</div><span class="folder-name">Informe P8</span></div>
+            <div class="folder-link" onclick="openDoc('URL_P8_PRUEBA')"><div class="glossy-box">📝</div><span class="folder-name">Prueba P8</span></div>
+        </div>
+    </section>
+
+    <!-- CONTENEDOR DEL VISOR DE DOCUMENTOS -->
     <section id="viewer-container">
         <button class="btn-nav" id="btn-cerrar-visor">← Cerrar Documento</button>
         <iframe id="doc-iframe" src=""></iframe>
