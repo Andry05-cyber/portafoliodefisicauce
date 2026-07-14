@@ -73,7 +73,7 @@
 
         .submenu-section, #viewer-container { display: none; width: 100%; flex-direction: column; align-items: center; }
 
-        iframe { width: 100%; height: 82vh; border-radius: 15px; border: 4px solid white; background: white; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        iframe { width: 100%; height: 80vh; border-radius: 15px; border: 4px solid white; background: white; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-top: 15px;}
 
         .btn-nav {
             margin-bottom: 20px; padding: 12px 30px;
@@ -98,6 +98,7 @@
         </div>
     </header>
 
+    <!-- MENÚ PRINCIPAL -->
     <main class="grid-container" id="menu-root">
         <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1wA377hozXZNZ_TnupGgHwxMVLo30DcMC/preview')">
             <div class="glossy-box">📜</div><span class="folder-name">Sílabo</span>
@@ -223,7 +224,7 @@
     <section class="submenu-section" id="menu-ind-u4">
         <button class="btn-nav" onclick="goBack('menu-tareas-ind')">← Volver a Unidades</button>
         <div class="info-card">
-            El mapa que se realizo el miercoles 1 de julio del 2026 no se me fue entregado por lo cual no lo puedo agregar pero si lo realize
+            El mapa que se realizó el miércoles 1 de julio del 2026 no se me fue entregado por lo cual no lo puedo agregar pero sí lo realicé.
         </div>
     </section>
 
@@ -381,7 +382,7 @@
         </div>
     </section>
 
-    <!-- SUBMENÚ: DEBERES DE LA PRACTICANTE (8 TAREAS) -->
+    <!-- SUBMENÚ: DEBERES DE LA PRACTICANTE (7 TAREAS CORREGIDAS) -->
     <section class="submenu-section" id="menu-deberes-practicante">
         <button class="btn-nav" onclick="goBack('menu-root')">← Volver al Inicio</button>
         <div class="grid-container">
@@ -392,67 +393,96 @@
             <div class="folder-link" onclick="openDoc('URL_TAREA_PRACTICANTE_5')"><div class="glossy-box">📁</div><span class="folder-name">Tarea 5</span></div>
             <div class="folder-link" onclick="openDoc('URL_TAREA_PRACTICANTE_6')"><div class="glossy-box">📁</div><span class="folder-name">Tarea 6</span></div>
             <div class="folder-link" onclick="openDoc('URL_TAREA_PRACTICANTE_7')"><div class="glossy-box">📁</div><span class="folder-name">Tarea 7</span></div>
-            <div class="folder-link" onclick="openDoc('URL_TAREA_PRACTICANTE_8')"><div class="glossy-box">📁</div><span class="folder-name">Tarea 8</span></div>
         </div>
     </section>
 
-
-    <!-- CONTENEDOR DEL VISOR DE DOCUMENTOS / IMÁGENES -->
+    <!-- VISOR INTERACTIVO DE DOCUMENTOS (IFRAME) -->
     <section id="viewer-container">
-        <button class="btn-nav" id="btn-cerrar-visor">← Cerrar Documento</button>
-        <iframe id="doc-iframe" src=""></iframe>
+        <button class="btn-nav" onclick="closeDoc()">← Cerrar Documento</button>
+        <iframe id="doc-iframe" src="" allow="autoplay"></iframe>
     </section>
 
+    <!-- CONTROLADOR JAVASCRIPT DE NAVEGACIÓN -->
     <script>
-        let currentMenuId = 'menu-root';
+        let menuAnterior = 'menu-root';
 
-        function showSubmenu(menuId) {
+        function showSubmenu(idSubmenu) {
+            // Ocultamos la cabecera principal e inicio
+            document.getElementById('main-header').style.display = 'none';
             document.getElementById('menu-root').style.display = 'none';
-            document.querySelectorAll('.submenu-section').forEach(s => s.style.display = 'none');
             document.getElementById('viewer-container').style.display = 'none';
-            document.getElementById('main-header').style.display = 'block';
-            
-            const target = document.getElementById(menuId);
-            if(target) { 
-                target.style.display = 'flex'; 
-                currentMenuId = menuId; 
+
+            // Ocultamos todos los submenús por si hay alguno abierto
+            const submenus = document.querySelectorAll('.submenu-section');
+            submenus.forEach(sub => sub.style.display = 'none');
+
+            // Mostramos el submenú correspondiente
+            const targetMenu = document.getElementById(idSubmenu);
+            if (targetMenu) {
+                targetMenu.style.display = 'flex';
             }
-            window.scrollTo(0, 0);
         }
 
-        function goBack(targetId) { 
-            document.querySelectorAll('.submenu-section').forEach(s => s.style.display = 'none');
+        function goBack(idDestino) {
+            // Ocultamos todos los submenús
+            const submenus = document.querySelectorAll('.submenu-section');
+            submenus.forEach(sub => sub.style.display = 'none');
             document.getElementById('viewer-container').style.display = 'none';
-            document.getElementById('main-header').style.display = 'block';
-            
-            const target = document.getElementById(targetId);
-            if(targetId === 'menu-root') {
+
+            if (idDestino === 'menu-root') {
+                // Volvemos al inicio mostrando la cabecera
+                document.getElementById('main-header').style.display = 'block';
                 document.getElementById('menu-root').style.display = 'flex';
-                currentMenuId = 'menu-root';
-            } else if(target) {
-                target.style.display = 'flex';
-                currentMenuId = targetId;
+            } else {
+                // Navegamos a un submenú específico
+                const targetMenu = document.getElementById(idDestino);
+                if (targetMenu) {
+                    targetMenu.style.display = 'flex';
+                }
             }
-            window.scrollTo(0, 0);
         }
 
         function openDoc(url) {
-            document.getElementById('menu-root').style.display = 'none';
-            document.querySelectorAll('.submenu-section').forEach(s => s.style.display = 'none');
-            document.getElementById('main-header').style.display = 'none';
+            // Buscamos cuál submenú o vista estaba abierta antes de lanzar el visor
+            const submenus = document.querySelectorAll('.submenu-section');
+            menuAnterior = 'menu-root'; // Por defecto volver al inicio
             
-            const viewer = document.getElementById('viewer-container');
+            submenus.forEach(sub => {
+                if (sub.style.display === 'flex') {
+                    menuAnterior = sub.id;
+                    sub.style.display = 'none';
+                }
+            });
+
+            // Si se abrió desde el inicio
+            if (document.getElementById('menu-root').style.display === 'flex') {
+                menuAnterior = 'menu-root';
+                document.getElementById('menu-root').style.display = 'none';
+                document.getElementById('main-header').style.display = 'none';
+            }
+
+            // Cargamos el URL en el iframe y mostramos el visor
             const iframe = document.getElementById('doc-iframe');
-            
             iframe.src = url;
-            viewer.style.display = 'flex';
-            window.scrollTo(0, 0);
+            document.getElementById('viewer-container').style.display = 'flex';
         }
 
-        document.getElementById('btn-cerrar-visor').addEventListener('click', function() {
+        function closeDoc() {
+            // Vaciamos el iframe para detener cargas en segundo plano
             document.getElementById('doc-iframe').src = "";
-            goBack(currentMenuId);
-        });
+            document.getElementById('viewer-container').style.display = 'none';
+
+            // Restauramos el menú o submenú donde estábamos anteriormente
+            if (menuAnterior === 'menu-root') {
+                document.getElementById('main-header').style.display = 'block';
+                document.getElementById('menu-root').style.display = 'flex';
+            } else {
+                const targetMenu = document.getElementById(menuAnterior);
+                if (targetMenu) {
+                    targetMenu.style.display = 'flex';
+                }
+            }
+        }
     </script>
 </body>
 </html>
