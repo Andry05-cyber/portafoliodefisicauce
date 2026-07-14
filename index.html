@@ -2,428 +2,197 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portafolio - Física Aplicada</title>
+    <title>Informe de Práctica: Construcción de un Sistema de Coordenadas Tridimensional</title>
     <style>
-        /* Estética Frutiger Aero */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-
         body {
-            background: linear-gradient(135deg, rgba(161, 223, 251, 0.4) 0%, rgba(212, 240, 255, 0.4) 50%, rgba(137, 207, 240, 0.4) 100%), 
-                        url('fondo.jpg'); 
-            background-size: cover; background-repeat: no-repeat; background-position: center; background-attachment: fixed;
-            min-height: 100vh; color: #1a4a5e; display: flex; flex-direction: column; align-items: center; padding: 2rem;
-        }
-
-        header {
-            background: rgba(255, 255, 255, 0.45);
-            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15), inset 0 1px 0 rgba(255,255,255,1);
-            border-radius: 20px; padding: 2rem; width: 100%; max-width: 900px; text-align: center; margin-bottom: 2.5rem;
-        }
-
-        header h1 { font-size: 1.8rem; color: #005682; text-shadow: 1px 1px 3px rgba(255,255,255,0.8); }
-        header h2 { font-size: 1.3rem; color: #023e8a; margin-top: 5px; }
-        header p { font-size: 1.1rem; color: #0077b6; }
-
-        .header-details {
-            display: inline-block; background: linear-gradient(180deg, rgba(255,255,255,0.9) 0%, rgba(230,245,255,0.7) 100%);
-            padding: 15px 25px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.9);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05); font-weight: bold; color: #023e8a; margin-top: 15px; width: 100%;
+            font-family: Arial, sans-serif;
             line-height: 1.6;
+            color: #333333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
         }
-
-        .grid-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; max-width: 1100px; width: 100%; }
-
-        .folder-link {
-            display: flex; flex-direction: column; align-items: center; text-decoration: none;
-            transition: all 0.3s ease; width: 160px; cursor: pointer;
+        h1 {
+            color: #1a365d;
+            text-align: center;
+            border-bottom: 2px solid #2b6cb0;
+            padding-bottom: 10px;
+            margin-top: 30px;
         }
-
-        .folder-link:hover { transform: translateY(-10px) scale(1.05); }
-
-        .glossy-box {
-            width: 110px; height: 110px; border-radius: 25px;
-            background: linear-gradient(180deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.2) 49%, rgba(255,255,255,0.0) 50%, rgba(255,255,255,0.4) 100%);
-            box-shadow: 0 10px 20px rgba(0, 119, 182, 0.2), inset 0 2px 3px rgba(255, 255, 255, 1);
-            border: 1px solid rgba(255, 255, 255, 0.6); display: flex; justify-content: center; align-items: center;
-            margin-bottom: 1rem; position: relative; overflow: hidden; font-size: 2.8rem;
+        h2 {
+            color: #2b6cb0;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 5px;
+            margin-top: 25px;
         }
-
-        .glossy-box::after {
-            content: ''; position: absolute; top: 2%; left: 5%; width: 90%; height: 45%;
-            background: linear-gradient(180deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.1) 100%);
-            border-radius: 20px 20px 100px 100px; pointer-events: none;
+        .header-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
         }
-
-        .folder-name {
-            font-size: 0.9rem; font-weight: 600; color: #005682; text-align: center;
-            background: rgba(255,255,255,0.5); padding: 5px 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.5);
+        .header-table td {
+            border: 1px solid #cbd5e0;
+            padding: 10px;
+            vertical-align: top;
         }
-
-        /* Tarjeta especial para comunicados o faltantes */
-        .info-card {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            box-shadow: 0 8px 24px rgba(0, 119, 182, 0.15);
-            padding: 2rem; border-radius: 20px; text-align: center; max-width: 600px; width: 100%;
-            color: #005682; font-weight: 500; font-size: 1.1rem; line-height: 1.6;
+        .header-title {
+            text-align: center;
+            font-weight: bold;
+            background-color: #f7fafc;
         }
-
-        .submenu-section, #viewer-container { display: none; width: 100%; flex-direction: column; align-items: center; }
-
-        iframe { width: 100%; height: 82vh; border-radius: 15px; border: 4px solid white; background: white; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-
-        .btn-nav {
-            margin-bottom: 20px; padding: 12px 30px;
-            background: linear-gradient(180deg, #4cc9f0 0%, #4361ee 100%);
-            color: white; border: none; border-radius: 50px; font-weight: bold; cursor: pointer;
-            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4); transition: 0.3s;
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
         }
-
-        .btn-nav:hover { transform: scale(1.05); filter: brightness(1.1); }
-
+        .data-table th, .data-table td {
+            border: 1px solid #cbd5e0;
+            padding: 12px;
+            text-align: left;
+        }
+        .data-table th {
+            background-color: #ebf8ff;
+            color: #2b6cb0;
+        }
+        .data-table tr:nth-child(even) {
+            background-color: #f7fafc;
+        }
+        .highlight-box {
+            background-color: #ebf8ff;
+            border-left: 4px solid #3182ce;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        ul, ol {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
     </style>
 </head>
 <body>
 
-    <header id="main-header">
-        <h1>Universidad Central del Ecuador</h1>
-        <h2>Facultad de Filosofía, Ciencias y Letras de la Educación</h2>
-        <p>Pedagogía en Ciencias Experimentales Informática</p>
-        <div class="header-details">
-            Portafolio de Física Aplicada | Andrés Jumbo | 5to Semestre<br>
-            Profesor: Diego Tipán
-        </div>
-    </header>
+    <table class="header-table">
+        <tr>
+            <td colspan="2" class="header-title">
+                UNIVERSIDAD CENTRAL DEL ECUADOR<br>
+                CENTRO DE FÍSICA
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>INTEGRANTES:</strong><br>
+                • Andrés Jumbo<br>
+                • Ambar Santillán<br>
+                • Verónica Paucar
+            </td>
+            <td>
+                <strong>GRUPO N°:</strong> 3<br>
+                <strong>PRÁCTICA N°:</strong> 1
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>FACULTAD:</strong> Filosofía, Letras y Ciencias de la Educación<br>
+                <strong>CARRERA:</strong> Pedagogía en las Ciencias Experimentales, Informática
+            </td>
+            <td>
+                <strong>SEMESTRE:</strong> 5º<br>
+                <strong>PARALELO:</strong> A
+            </td>
+        </tr>
+    </table>
 
-    <main class="grid-container" id="menu-root">
-        <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1wA377hozXZNZ_TnupGgHwxMVLo30DcMC/preview')">
-            <div class="glossy-box">📜</div><span class="folder-name">Sílabo</span>
-        </div>
-        <div class="folder-link" onclick="showSubmenu('menu-info')">
-            <div class="glossy-box">👤</div><span class="folder-name">Información Personal</span>
-        </div>
-        <div class="folder-link" onclick="showSubmenu('menu-tareas-ind')">
-            <div class="glossy-box">📓</div><span class="folder-name">Tareas Individuales</span>
-        </div>
-        <div class="folder-link" onclick="showSubmenu('menu-ensayos')">
-            <div class="glossy-box">✒️</div><span class="folder-name">Ensayos</span>
-        </div>
-        <div class="folder-link" onclick="showSubmenu('menu-tareas-grup')">
-            <div class="glossy-box">👥</div><span class="folder-name">Tareas Grupales</span>
-        </div>
-        <div class="folder-link" onclick="showSubmenu('menu-centro')">
-            <div class="glossy-box">🔬</div><span class="folder-name">Centro de Física</span>
-        </div>
-        <div class="folder-link" onclick="showSubmenu('menu-evaluaciones')">
-            <div class="glossy-box">📝</div><span class="folder-name">Evaluaciones Virtuales</span>
-        </div>
-        <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1AtzCsY8HxpHfU9cWFJpzeOoyeXzlG405/preview')">
-            <div class="glossy-box">📖</div><span class="folder-name">Glosario</span>
-        </div>
-    </main>
+    <h1>Construcción de un Sistema de Coordenadas Tridimensional y Representación de Vectores (Modelo Físico y GeoGebra)</h1>
 
-    <!-- SUBMENÚ: INFORMACIÓN PERSONAL -->
-    <section class="submenu-section" id="menu-info">
-        <button class="btn-nav" onclick="goBack('menu-root')">← Volver al Inicio</button>
-        <div class="grid-container">
-            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1ucsblyUTAxLY-ZvINzyu0ZwA8cWMj8tF/preview')"><div class="glossy-box">👨‍🎓</div><span class="folder-name">Currículum</span></div>
-            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/18byDHbYDa-ZRSJj4d4kjAO99r2SujT5q/preview')"><div class="glossy-box">📝</div><span class="folder-name">Matrícula</span></div>
-            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/16UzyIug5kpK8Eo7pTCz057yDpVHkv7Me/preview')"><div class="glossy-box">📅</div><span class="folder-name">Horario General</span></div>
-        </div>
-    </section>
+    <h2>OBJETIVOS</h2>
+    <ul>
+        <li>Construir en equipo un modelo físico tridimensional (octantes) utilizando materiales concretos (palos de pincho, cartulina y papel) para ubicar espacialmente los vectores propuestos, y validar dicha representación mediante el software GeoGebra para asegurar la precisión de los resultados.</li>
+    </ul>
 
-    <!-- SUBMENÚ: ENSAYOS -->
-    <section class="submenu-section" id="menu-ensayos">
-        <button class="btn-nav" onclick="goBack('menu-root')">← Volver al Inicio</button>
-        <div class="grid-container">
-            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1FrEMWFSAJGLexofPBMGK76y0hdw0LhwH/preview')"><div class="glossy-box">🎤</div><span class="folder-name">Ensayo Conferencia</span></div>
-            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1f2zK272H2jtuAJbQi_uBNMSfhDnSofNX/preview')"><div class="glossy-box">💡</div><span class="folder-name">Ensayo Smart Learning</span></div>
-            <div class="folder-link" onclick="showSubmenu('menu-ensayo-libro')"><div class="glossy-box">📚</div><span class="folder-name">Ensayo del Libro</span></div>
-            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/141kEJx9Os1RJyn5NYVGNNnv7e740SjCp/preview')"><div class="glossy-box">🎬</div><span class="folder-name">Ensayo del Video</span></div>
-        </div>
-    </section>
+    <h2>EQUIPO DE EXPERIMENTACIÓN</h2>
+    <ul>
+        <li>Palos de pincho</li>
+        <li>Cartulinas</li>
+        <li>Papel</li>
+        <li>Silicona</li>
+        <li>Regla y graduador</li>
+        <li>Marcadores</li>
+        <li>Tijeras o estilete</li>
+        <li>Software GeoGebra</li>
+    </ul>
 
-    <!-- SUBMENÚ: ENSAYO DEL LIBRO -->
-    <section class="submenu-section" id="menu-ensayo-libro">
-        <button class="btn-nav" onclick="goBack('menu-ensayos')">← Volver a Ensayos</button>
-        <div class="grid-container">
-            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1Tz1KBnuGdxwx1UKFxdHKHWaRoOmPwUkn/preview')"><div class="glossy-box">1️⃣</div><span class="folder-name">Capítulo 1</span></div>
-            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/126hqR-zJiF6e_lMKU2Q7Jg5u8ds6xjb9/preview')"><div class="glossy-box">2️⃣</div><span class="folder-name">Capítulo 2</span></div>
-            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1ylhw-TmyJORM_BlAHaCRrE4mn-bxnZph/preview')"><div class="glossy-box">3️⃣</div><span class="folder-name">Capítulo 3</span></div>
-            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1qO_xQTFbvleHDav1mz_p0GosBeRhkp49/preview')"><div class="glossy-box">4️⃣</div><span class="folder-name">Capítulo 4</span></div>
-            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1-qyqsbiQdcGe2c0oMvX49G12dZDtWcNI/preview')"><div class="glossy-box">📋</div><span class="folder-name">Rúbrica</span></div>
-        </div>
-    </section>
-
-    <!-- SUBMENÚ: TAREAS GRUPALES -->
-    <section class="submenu-section" id="menu-tareas-grup">
-        <button class="btn-nav" onclick="goBack('menu-root')">← Volver al Inicio</button>
-        <div class="grid-container">
-            <div class="folder-link" onclick="openDoc('URL_TAREA_GRUPAL_DIGITAL')"><div class="glossy-box">💻</div><span class="folder-name">Fundamento Digital</span></div>
-            <div class="folder-link" onclick="openDoc('URL_TAREA_GRUPAL_ESCRITO')"><div class="glossy-box">📝</div><span class="folder-name">Fundamento Escrito</span></div>
-        </div>
-    </section>
-
-    <!-- SUBMENÚ: TAREAS INDIVIDUALES (UNIDADES) -->
-    <section class="submenu-section" id="menu-tareas-ind">
-        <button class="btn-nav" onclick="goBack('menu-root')">← Volver al Inicio</button>
-        <div class="grid-container">
-            <div class="folder-link" onclick="showSubmenu('menu-ind-u1')"><div class="glossy-box">1️⃣</div><span class="folder-name">Unidad 1</span></div>
-            <div class="folder-link" onclick="showSubmenu('menu-ind-u2')"><div class="glossy-box">2️⃣</div><span class="folder-name">Unidad 2</span></div>
-            <div class="folder-link" onclick="showSubmenu('menu-ind-u3')"><div class="glossy-box">3️⃣</div><span class="folder-name">Unidad 3</span></div>
-            <div class="folder-link" onclick="showSubmenu('menu-ind-u4')"><div class="glossy-box">4️⃣</div><span class="folder-name">Unidad 4</span></div>
-        </div>
-    </section>
-
-    <!-- TAREAS INDIVIDUALES: UNIDAD 1 -->
-    <section class="submenu-section" id="menu-ind-u1">
-        <button class="btn-nav" onclick="goBack('menu-tareas-ind')">← Volver a Unidades</button>
-        <div class="grid-container">
-            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1l2EJ9ZZwCA25am3EnK7X-bWUFPGdQDix/preview')"><div class="glossy-box">✍️</div><span class="folder-name">Ensayo</span></div>
-            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1ZkQUBwZ0vIzofFQ6jyfcUy6tLVLv6p_6/preview')"><div class="glossy-box">🧠</div><span class="folder-name">Mapa Mental SI</span></div>
-            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1sS-uMWPysFVXiRJYMGSXjWbd2C1Y1_Zz/preview')"><div class="glossy-box">📏</div><span class="folder-name">10 Ejercicios Conv.</span></div>
-            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1HR_nJ2ISYUeZGGYGMg60KjPIRtfNlSdp/preview')"><div class="glossy-box">📐</div><span class="folder-name">M. Mental Trigonometría</span></div>
-            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1rtoMoJ9aKTK1mTF7o6R635YT9gAao6dZ/preview')"><div class="glossy-box">📈</div><span class="folder-name">10 Gráficos Vectores</span></div>
-            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1HDDz9mkKYyXoIKU8FktUTUzX9nU2Bn49/preview')"><div class="glossy-box">🧭</div><span class="folder-name">Ejercicios Representación de Vectores</span></div>
-            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1VEtZfOyYbtkdYFtdQ9xkrfYWHbcou68b/preview')"><div class="glossy-box">➕</div><span class="folder-name">5 Ejercicios Suma de Vectores 3D</span></div>
-            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1KGTJUaPUi6ATctW4GvbyM8H07MGukIje/preview')"><div class="glossy-box">➕</div><span class="folder-name">7 Ejercicios Suma de Vectores 3D (3 Vectores)</span></div>
-            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1Fgqk8_P5NnUUwaTMfeTPM6HSHvcsi_0G/preview')"><div class="glossy-box">🗺️</div><span class="folder-name">Mapa de la Unidad 1</span></div>
-        </div>
-    </section>
+    <h2>FUNDAMENTO CONCEPTUAL</h2>
+    <p>El espacio tridimensional se define por la intersección de tres ejes perpendiculares: eje X (abscisas), eje Y (ordenadas) y eje Z (cotas). Esta intersección crea tres planos (xy, xz, yz) que dividen el espacio en ocho regiones conocidas como octantes. Para ubicar un vector en este espacio, se utilizan sus componentes rectangulares. El signo de estas componentes determina en qué octante se ubicará el vector.</p>
+    <p>Además de la representación física, herramientas de software como GeoGebra 3D permiten modelar matemáticamente este espacio para comprobar ángulos, módulos y la ubicación exacta sin los márgenes de error de la construcción manual.</p>
     
-    <!-- TAREAS INDIVIDUALES: UNIDAD 2 -->
-    <section class="submenu-section" id="menu-ind-u2">
-        <button class="btn-nav" onclick="goBack('menu-tareas-ind')">← Volver a Unidades</button>
-        <div class="grid-container">
-            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/160Tcw9c8cRpsyNQq4rd10kntX5_2CWoC/preview')"><div class="glossy-box">🧠</div><span class="folder-name">Mapa Mental Unidad 2</span></div>
-            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1fb0vO1tALD4G7kY8DDOOv2Qa0F18xSQb/preview')"><div class="glossy-box">🗺️</div><span class="folder-name">Mapa de Cinemática</span></div>
-            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1zYxJUpHU1g28KPE4TuMnc5p7GXhNaKkT/preview')"><div class="glossy-box">📏</div><span class="folder-name">10 Ejercicios MCU y MCUA</span></div>
-            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1Hd6oTUkPFfMLF664KmfNsgmeF_q_oreU/preview')"><div class="glossy-box">🧠</div><span class="folder-name">Mapa Mental MCU y MCUA</span></div>
-            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1Zo3ZBxIFOjbH1y7kliPGPnuAwQOwj6Hn/preview')"><div class="glossy-box">🗺️</div><span class="folder-name">Mapa Ecuaciones Horarias (Rotación y Traslación)</span></div>
-            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1JVbNN1wewfkC0t-PxdfPSojQzb03MSA2/preview')"><div class="glossy-box">📐</div><span class="folder-name">7 Ejercicios Movimiento Parabólico</span></div>
-        </div>
-    </section>
+    <div class="highlight-box">
+        <strong>Vectores a representar:</strong><br>
+        • <strong>A</strong> = 7i - 6j - 4k<br>
+        • <strong>B</strong> = 3i + 4j + 8k<br>
+        • <strong>C</strong> = 12i - 2j - 2k
+    </div>
+
+    <h2>PROCEDIMIENTO</h2>
     
-    <!-- TAREAS INDIVIDUALES: UNIDAD 3 -->
-    <section class="submenu-section" id="menu-ind-u3">
-        <button class="btn-nav" onclick="goBack('menu-tareas-ind')">← Volver a Unidades</button>
-        <div class="grid-container">
-            <div class="folder-link" onclick="openDoc('URL_U3_MAPA_UNIDAD3')"><div class="glossy-box">🗺️</div><span class="folder-name">Mapa de la Unidad 3</span></div>
-            <div class="folder-link" onclick="openDoc('URL_U3_25_EJERCICIOS')"><div class="glossy-box">📏</div><span class="folder-name">25 Ejercicios con D.C.L.</span></div>
-        </div>
-    </section>
-    
-    <!-- TAREAS INDIVIDUALES: UNIDAD 4 -->
-    <section class="submenu-section" id="menu-ind-u4">
-        <button class="btn-nav" onclick="goBack('menu-tareas-ind')">← Volver a Unidades</button>
-        <div class="info-card">
-            El mapa que se realizo el miercoles 1 de julio del 2026 no se me fue entregado por lo cual no lo puedo agregar pero si lo realize
-        </div>
-    </section>
+    <h3>Fase 1: Construcción del modelo físico (Trabajo en equipo)</h3>
+    <ul>
+        <li>Se utilizaron láminas de cartulina y papel para construir los planos coordenados xy, xz, yz, creando una base sólida que simula la división de los ocho octantes.</li>
+        <li>Se emplearon palos de pincho para representar los ejes X, Y, Z. Estos se atravesaron y fijaron en el centro de los planos de cartulina, marcando claramente los lados positivos y negativos de cada eje.</li>
+        <li>Utilizando regla y medidas a escala, se ubicaron las coordenadas de los vectores A, B y C en el espacio de la maqueta, usando trozos adicionales de palos de pincho o hilo para marcar la trayectoria desde el origen (0,0,0) hasta el punto final del vector.</li>
+    </ul>
 
-    <!-- SUBMENÚ PRINCIPAL: CENTRO DE FÍSICA -->
-    <section class="submenu-section" id="menu-centro">
-        <button class="btn-nav" onclick="goBack('menu-root')">← Volver al Inicio</button>
-        <div class="grid-container">
-            <div class="folder-link" onclick="showSubmenu('menu-p1')"><div class="glossy-box">🔬</div><span class="folder-name">Práctica 1</span></div>
-            <div class="folder-link" onclick="showSubmenu('menu-p2')"><div class="glossy-box">🔬</div><span class="folder-name">Práctica 2</span></div>
-            <div class="folder-link" onclick="showSubmenu('menu-p3')"><div class="glossy-box">🔬</div><span class="folder-name">Práctica 3</span></div>
-            <div class="folder-link" onclick="showSubmenu('menu-p4')"><div class="glossy-box">🔬</div><span class="folder-name">Práctica 4</span></div>
-            <div class="folder-link" onclick="showSubmenu('menu-p5')"><div class="glossy-box">🔬</div><span class="folder-name">Práctica 5</span></div>
-            <div class="folder-link" onclick="showSubmenu('menu-p6')"><div class="glossy-box">🔬</div><span class="folder-name">Práctica 6</span></div>
-            <div class="folder-link" onclick="showSubmenu('menu-p7')"><div class="glossy-box">🔬</div><span class="folder-name">Práctica 7</span></div>
-            <div class="folder-link" onclick="showSubmenu('menu-p8')"><div class="glossy-box">🔬</div><span class="folder-name">Práctica 8</span></div>
-            <div class="folder-link" onclick="showSubmenu('menu-p9')"><div class="glossy-box">🔬</div><span class="folder-name">Práctica 9</span></div>
-            <div class="folder-link" onclick="showSubmenu('menu-p10')"><div class="glossy-box">🔬</div><span class="folder-name">Práctica 10</span></div>
-        </div>
-    </section>
+    <h3>Fase 2: Validación digital con GeoGebra</h3>
+    <ul>
+        <li>Se abrió la herramienta GeoGebra y se seleccionó la "Vista Gráfica 3D".</li>
+        <li>En la barra de entrada, se ingresaron las coordenadas de los puntos finales de cada vector:
+            <ul>
+                <li>A = (7, -6, -4)</li>
+                <li>B = (3, 4, 8)</li>
+                <li>C = (12, -2, -2)</li>
+            </ul>
+        </li>
+        <li>Se utilizó el comando <code>Vector(Punto)</code> o la herramienta de vector para trazar las flechas desde el origen hasta cada punto ingresado.</li>
+        <li>Se rotó la vista 3D en el software para comparar visualmente si los vectores caían en los mismos octantes que en la maqueta de cartulina y palos de pincho.</li>
+    </ul>
 
-    <!-- CONTENIDOS DETALLADOS DE CADA PRÁCTICA (1 al 10) -->
-    <section class="submenu-section" id="menu-p1">
-        <button class="btn-nav" onclick="goBack('menu-centro')">← Volver a Prácticas</button>
-        <div class="grid-container">
-            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1-LkIVhBW7brdRQ_H1me8bZNbLjSmsNdj/preview')"><div class="glossy-box">📖</div><span class="folder-name">Fundamento P1</span></div>
-            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1HjMLn-AqoyNil-xL5xeQcbQjFObgdgaV/preview')"><div class="glossy-box">📊</div><span class="folder-name">Informe P1</span></div>
-            <div class="folder-link" onclick="openDoc('URL_P1_PRUEBA')"><div class="glossy-box">📝</div><span class="folder-name">Prueba P1</span></div>
-        </div>
-    </section>
+    <h2>CUESTIONARIO</h2>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th style="width: 35%;">Pregunta / Planteamiento</th>
+                <th>Desarrollo y Respuesta</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>¿Cómo se determinó el octante de cada vector en la maqueta?</strong></td>
+                <td>Se determinó observando el signo de cada componente. Por ejemplo, el vector B, al ser todas sus componentes positivas, se ubicó en el espacio frontal superior (Octante I). Los vectores A y C, al tener componentes Y y Z negativas, se proyectaron hacia la región inferior derecha trasera (Octante VIII).</td>
+            </tr>
+            <tr>
+                <td><strong>Calcule analíticamente el módulo de cada vector:</strong></td>
+                <td>
+                    Se utilizó la fórmula: <strong>||v|| = &radic;(x² + y² + z²)</strong><br><br>
+                    • <strong>Módulo de A:</strong> &radic;(7² + (-6)² + (-4)²) = &radic;(49 + 36 + 16) = &radic;101 &approx; <strong>10.05</strong><br><br>
+                    • <strong>Módulo de B:</strong> &radic;(3² + 4² + 8²) = &radic;(9 + 16 + 64) = &radic;89 &approx; <strong>9.43</strong><br><br>
+                    • <strong>Módulo de C:</strong> &radic;(12² + (-2)² + (-2)²) = &radic;(144 + 4 + 4) = &radic;152 &approx; <strong>12.33</strong>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>¿Qué importancia tuvo el uso de GeoGebra en esta práctica?</strong></td>
+                <td>Sirvió como método de validación. Mientras que la maqueta de cartulina nos da la noción física y espacial tangible, GeoGebra nos dio la certeza matemática de que nuestras mediciones y la interpretación de los octantes eran plenamente correctas.</td>
+            </tr>
+        </tbody>
+    </table>
 
-    <section class="submenu-section" id="menu-p2">
-        <button class="btn-nav" onclick="goBack('menu-centro')">← Volver a Prácticas</button>
-        <div class="grid-container">
-            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1MPkjDflHibXJR-QxoSs--Soz8L1q71zN/preview')"><div class="glossy-box">📖</div><span class="folder-name">Fundamento P2</span></div>
-            <div class="folder-link" onclick="openDoc('URL_INFORME_P2')"><div class="glossy-box">📊</div><span class="folder-name">Informe P2</span></div>
-            <div class="folder-link" onclick="openDoc('URL_P2_PRUEBA')"><div class="glossy-box">📝</div><span class="folder-name">Prueba P2</span></div>
-        </div>
-    </section>
+    <h2>CONCLUSIONES</h2>
+    <ul>
+        <li>La construcción manual con cartulina y palos de pincho fue fundamental para comprender de manera tangible la tridimensionalidad, permitiendo identificar visualmente cómo el eje Z negativo posiciona a los vectores por debajo del plano base.</li>
+        <li>La validación digital confirmó que los vectores A y C se encuentran en el Octante VIII, mientras que el vector B se ubica en el Octante I, demostrando que el análisis teórico de los signos coincide plenamente con la realidad física y el modelado computacional.</li>
+        <li>El trabajo en equipo permitió integrar habilidades de construcción manual y manejo de software, logrando un aprendizaje integral sobre la geometría analítica en el espacio tridimensional.</li>
+    </ul>
 
-    <section class="submenu-section" id="menu-p3">
-        <button class="btn-nav" onclick="goBack('menu-centro')">← Volver a Prácticas</button>
-        <div class="grid-container">
-            <div class="folder-link" onclick="openDoc('URL_P3_FUNDAMENTO')"><div class="glossy-box">📖</div><span class="folder-name">Fundamento P3</span></div>
-            <div class="folder-link" onclick="openDoc('URL_P3_INFORME')"><div class="glossy-box">📊</div><span class="folder-name">Informe P3</span></div>
-            <div class="folder-link" onclick="openDoc('URL_P3_PRUEBA')"><div class="glossy-box">📝</div><span class="folder-name">Prueba P3</span></div>
-        </div>
-    </section>
-
-    <section class="submenu-section" id="menu-p4">
-        <button class="btn-nav" onclick="goBack('menu-centro')">← Volver a Prácticas</button>
-        <div class="grid-container">
-            <div class="folder-link" onclick="openDoc('URL_P4_FUNDAMENTO')"><div class="glossy-box">📖</div><span class="folder-name">Fundamento P4</span></div>
-            <div class="folder-link" onclick="openDoc('URL_P4_INFORME')"><div class="glossy-box">📊</div><span class="folder-name">Informe P4</span></div>
-            <div class="folder-link" onclick="openDoc('URL_P4_PRUEBA')"><div class="glossy-box">📝</div><span class="folder-name">Prueba P4</span></div>
-        </div>
-    </section>
-
-    <section class="submenu-section" id="menu-p5">
-        <button class="btn-nav" onclick="goBack('menu-centro')">← Volver a Prácticas</button>
-        <div class="grid-container">
-            <div class="folder-link" onclick="openDoc('URL_P5_FUNDAMENTO')"><div class="glossy-box">📖</div><span class="folder-name">Fundamento P5</span></div>
-            <div class="folder-link" onclick="openDoc('URL_P5_INFORME')"><div class="glossy-box">📊</div><span class="folder-name">Informe P5</span></div>
-            <div class="folder-link" onclick="openDoc('URL_P5_PRUEBA')"><div class="glossy-box">📝</div><span class="folder-name">Prueba P5</span></div>
-        </div>
-    </section>
-
-    <section class="submenu-section" id="menu-p6">
-        <button class="btn-nav" onclick="goBack('menu-centro')">← Volver a Prácticas</button>
-        <div class="grid-container">
-            <div class="folder-link" onclick="openDoc('URL_P6_FUNDAMENTO')"><div class="glossy-box">📖</div><span class="folder-name">Fundamento P6</span></div>
-            <div class="folder-link" onclick="openDoc('URL_P6_INFORME')"><div class="glossy-box">📊</div><span class="folder-name">Informe P6</span></div>
-            <div class="folder-link" onclick="openDoc('URL_P6_PRUEBA')"><div class="glossy-box">📝</div><span class="folder-name">Prueba P6</span></div>
-        </div>
-    </section>
-
-    <section class="submenu-section" id="menu-p7">
-        <button class="btn-nav" onclick="goBack('menu-centro')">← Volver a Prácticas</button>
-        <div class="grid-container">
-            <div class="folder-link" onclick="openDoc('URL_P7_FUNDAMENTO')"><div class="glossy-box">📖</div><span class="folder-name">Fundamento P7</span></div>
-            <div class="folder-link" onclick="openDoc('URL_P7_INFORME')"><div class="glossy-box">📊</div><span class="folder-name">Informe P7</span></div>
-            <div class="folder-link" onclick="openDoc('URL_P7_PRUEBA')"><div class="glossy-box">📝</div><span class="folder-name">Prueba P7</span></div>
-        </div>
-    </section>
-
-    <section class="submenu-section" id="menu-p8">
-        <button class="btn-nav" onclick="goBack('menu-centro')">← Volver a Prácticas</button>
-        <div class="grid-container">
-            <div class="folder-link" onclick="openDoc('URL_P8_FUNDAMENTO')"><div class="glossy-box">📖</div><span class="folder-name">Fundamento P8</span></div>
-            <div class="folder-link" onclick="openDoc('URL_P8_INFORME')"><div class="glossy-box">📊</div><span class="folder-name">Informe P8</span></div>
-            <div class="folder-link" onclick="openDoc('URL_P8_PRUEBA')"><div class="glossy-box">📝</div><span class="folder-name">Prueba P8</span></div>
-        </div>
-    </section>
-
-    <section class="submenu-section" id="menu-p9">
-        <button class="btn-nav" onclick="goBack('menu-centro')">← Volver a Prácticas</button>
-        <div class="grid-container">
-            <div class="folder-link" onclick="openDoc('URL_P9_FUNDAMENTO')"><div class="glossy-box">📖</div><span class="folder-name">Fundamento P9</span></div>
-            <div class="folder-link" onclick="openDoc('URL_P9_INFORME')"><div class="glossy-box">📊</div><span class="folder-name">Informe P9</span></div>
-            <div class="folder-link" onclick="openDoc('URL_P9_PRUEBA')"><div class="glossy-box">📝</div><span class="folder-name">Prueba P9</span></div>
-        </div>
-    </section>
-
-    <section class="submenu-section" id="menu-p10">
-        <button class="btn-nav" onclick="goBack('menu-centro')">← Volver a Prácticas</button>
-        <div class="grid-container">
-            <div class="folder-link" onclick="openDoc('URL_P10_FUNDAMENTO')"><div class="glossy-box">📖</div><span class="folder-name">Fundamento P10</span></div>
-            <div class="folder-link" onclick="openDoc('URL_P10_INFORME')"><div class="glossy-box">📊</div><span class="folder-name">Informe P10</span></div>
-            <div class="folder-link" onclick="openDoc('URL_P10_PRUEBA')"><div class="glossy-box">📝</div><span class="folder-name">Prueba P10</span></div>
-        </div>
-    </section>
-
-
-    <!-- SUBMENÚ PRINCIPAL: EVALUACIONES VIRTUALES -->
-    <section class="submenu-section" id="menu-evaluaciones">
-        <button class="btn-nav" onclick="goBack('menu-root')">← Volver al Inicio</button>
-        <div class="grid-container">
-            <div class="folder-link" onclick="showSubmenu('menu-eva-u1')"><div class="glossy-box">1️⃣</div><span class="folder-name">Evaluación Unidad 1</span></div>
-            <div class="folder-link" onclick="showSubmenu('menu-eva-u2')"><div class="glossy-box">2️⃣</div><span class="folder-name">Evaluación Unidad 2</span></div>
-            <div class="folder-link" onclick="showSubmenu('menu-eva-u3')"><div class="glossy-box">3️⃣</div><span class="folder-name">Evaluación Unidad 3</span></div>
-            <div class="folder-link" onclick="showSubmenu('menu-eva-u4')"><div class="glossy-box">4️⃣</div><span class="folder-name">Evaluación Unidad 4</span></div>
-        </div>
-    </section>
-
-    <!-- DETALLES EVALUACIONES: UNIDAD 1 (4 imágenes/entradas) -->
-    <section class="submenu-section" id="menu-eva-u1">
-        <button class="btn-nav" onclick="goBack('menu-evaluaciones')">← Volver a Evaluaciones</button>
-        <div class="grid-container">
-            <div class="folder-link" onclick="openDoc('URL_IMAGEN_EVA1_P1')"><div class="glossy-box">📸</div><span class="folder-name">Prueba 1</span></div>
-            <div class="folder-link" onclick="openDoc('URL_IMAGEN_EVA1_P2')"><div class="glossy-box">📸</div><span class="folder-name">Prueba 2</span></div>
-            <div class="folder-link" onclick="openDoc('URL_IMAGEN_EVA1_P3')"><div class="glossy-box">📸</div><span class="folder-name">Prueba 3</span></div>
-            <div class="folder-link" onclick="openDoc('URL_IMAGEN_EVA1_P4')"><div class="glossy-box">📸</div><span class="folder-name">Prueba 4</span></div>
-        </div>
-    </section>
-
-    <!-- DETALLES EVALUACIONES: UNIDAD 2 (4 imágenes/entradas) -->
-    <section class="submenu-section" id="menu-eva-u2">
-        <button class="btn-nav" onclick="goBack('menu-evaluaciones')">← Volver a Evaluaciones</button>
-        <div class="grid-container">
-            <div class="folder-link" onclick="openDoc('URL_IMAGEN_EVA2_P1')"><div class="glossy-box">📸</div><span class="folder-name">Prueba 1</span></div>
-            <div class="folder-link" onclick="openDoc('URL_IMAGEN_EVA2_P2')"><div class="glossy-box">📸</div><span class="folder-name">Prueba 2</span></div>
-            <div class="folder-link" onclick="openDoc('URL_IMAGEN_EVA2_P3')"><div class="glossy-box">📸</div><span class="folder-name">Prueba 3</span></div>
-            <div class="folder-link" onclick="openDoc('URL_IMAGEN_EVA2_P4')"><div class="glossy-box">📸</div><span class="folder-name">Prueba 4</span></div>
-        </div>
-    </section>
-
-    <!-- DETALLES EVALUACIONES: UNIDAD 3 (4 imágenes/entradas) -->
-    <section class="submenu-section" id="menu-eva-u3">
-        <button class="btn-nav" onclick="goBack('menu-evaluaciones')">← Volver a Evaluaciones</button>
-        <div class="grid-container">
-            <div class="folder-link" onclick="openDoc('URL_IMAGEN_EVA3_P1')"><div class="glossy-box">📸</div><span class="folder-name">Prueba 1</span></div>
-            <div class="folder-link" onclick="openDoc('URL_IMAGEN_EVA3_P2')"><div class="glossy-box">📸</div><span class="folder-name">Prueba 2</span></div>
-            <div class="folder-link" onclick="openDoc('URL_IMAGEN_EVA3_P3')"><div class="glossy-box">📸</div><span class="folder-name">Prueba 3</span></div>
-            <div class="folder-link" onclick="openDoc('URL_IMAGEN_EVA3_P4')"><div class="glossy-box">📸</div><span class="folder-name">Prueba 4</span></div>
-        </div>
-    </section>
-
-    <!-- DETALLES EVALUACIONES: UNIDAD 4 (4 imágenes/entradas) -->
-    <section class="submenu-section" id="menu-eva-u4">
-        <button class="btn-nav" onclick="goBack('menu-evaluaciones')">← Volver a Evaluaciones</button>
-        <div class="grid-container">
-            <div class="folder-link" onclick="openDoc('URL_IMAGEN_EVA4_P1')"><div class="glossy-box">📸</div><span class="folder-name">Prueba 1</span></div>
-            <div class="folder-link" onclick="openDoc('URL_IMAGEN_EVA4_P2')"><div class="glossy-box">📸</div><span class="folder-name">Prueba 2</span></div>
-            <div class="folder-link" onclick="openDoc('URL_IMAGEN_EVA4_P3')"><div class="glossy-box">📸</div><span class="folder-name">Prueba 3</span></div>
-            <div class="folder-link" onclick="openDoc('URL_IMAGEN_EVA4_P4')"><div class="glossy-box">📸</div><span class="folder-name">Prueba 4</span></div>
-        </div>
-    </section>
-
-
-    <!-- CONTENEDOR DEL VISOR DE DOCUMENTOS / IMÁGENES -->
-    <section id="viewer-container">
-        <button class="btn-nav" id="btn-cerrar-visor">← Cerrar Documento</button>
-        <iframe id="doc-iframe" src=""></iframe>
-    </section>
-
-    <script>
-        let currentMenuId = 'menu-root';
-
-        function showSubmenu(menuId) {
-            document.getElementById('menu-root').style.display = 'none';
-            document.querySelectorAll('.submenu-section').forEach(s => s.style.display = 'none');
-            document.getElementById('viewer-container').style.display = 'none';
-            document.getElementById('main-header').style.display = 'block';
-            const target = document.getElementById(menuId);
-            if(target) { target.style.display = 'flex'; currentMenuId = menuId; }
-            window.scrollTo(0, 0);
-        }
-
-        function goBack(targetId) { showSubmenu(targetId); }
-
-        function openDoc(url) {
-            document.getElementById('main-header').style.display = 'none';
-            document.querySelectorAll('main, .submenu-section').forEach(el => el.style.display = 'none');
-            document.getElementById('viewer-container').style.display = 'flex';
-            document.getElementById('doc-iframe').src = url;
-            document.getElementById('btn-cerrar-visor').onclick = function() {
-                document.getElementById('viewer-container').style.display = 'none';
-                document.getElementById('main-header').style.display = 'block';
-                document.getElementById(currentMenuId).style.display = 'flex';
-                document.getElementById('doc-iframe').src = "";
-            };
-            window.scrollTo(0, 0);
-        }
-    </script>
 </body>
 </html>
