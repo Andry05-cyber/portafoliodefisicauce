@@ -3,494 +3,486 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portafolio Digital - Física Aplicada</title>
+    <title>Portafolio - Física Aplicada</title>
     <style>
-        :root {
-            --bg-color: #f4f6f9;
-            --card-bg: #ffffff;
-            --primary-color: #002f6c; /* Azul UCE */
-            --accent-color: #e28743;
-            --text-color: #333333;
-            --text-muted: #666666;
-            --border-radius: 12px;
-            --shadow: 0 4px 6px rgba(0,0,0,0.05);
-            --transition: all 0.25s ease;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+        /* Estética Frutiger Aero */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+            background: linear-gradient(135deg, rgba(161, 223, 251, 0.4) 0%, rgba(212, 240, 255, 0.4) 50%, rgba(137, 207, 240, 0.4) 100%), 
+                        url('fondo.jpg'); 
+            background-size: cover; background-repeat: no-repeat; background-position: center; background-attachment: fixed;
+            min-height: 100vh; color: #1a4a5e; display: flex; flex-direction: column; align-items: center; padding: 2rem;
         }
 
-        /* HEADER */
         header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15), inset 0 1px 0 rgba(255,255,255,1);
+            border-radius: 20px; padding: 2rem; width: 100%; max-width: 900px; text-align: center; margin-bottom: 2.5rem;
         }
 
-        header h1 {
-            font-size: 1.8rem;
-            margin-bottom: 5px;
-            font-weight: 600;
+        header h1 { font-size: 1.8rem; color: #005682; text-shadow: 1px 1px 3px rgba(255,255,255,0.8); }
+        header h2 { font-size: 1.3rem; color: #023e8a; margin-top: 5px; }
+        header p { font-size: 1.1rem; color: #0077b6; }
+
+        .header-details {
+            display: inline-block; background: linear-gradient(180deg, rgba(255,255,255,0.9) 0%, rgba(230,245,255,0.7) 100%);
+            padding: 15px 25px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.9);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); font-weight: bold; color: #023e8a; margin-top: 15px; width: 100%;
+            line-height: 1.6;
         }
 
-        header p {
-            font-size: 0.95rem;
-            opacity: 0.9;
+        .grid-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; max-width: 1100px; width: 100%; }
+
+        .folder-link {
+            display: flex; flex-direction: column; align-items: center; text-decoration: none;
+            transition: all 0.3s ease; width: 160px; cursor: pointer;
         }
 
-        /* CONTENEDOR PRINCIPAL */
-        main {
-            flex: 1;
-            max-width: 1200px;
-            width: 100%;
-            margin: 0 auto;
-            padding: 30px 20px;
+        .folder-link:hover { transform: translateY(-10px) scale(1.05); }
+
+        .glossy-box {
+            width: 110px; height: 110px; border-radius: 25px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.2) 49%, rgba(255,255,255,0.0) 50%, rgba(255,255,255,0.4) 100%);
+            box-shadow: 0 10px 20px rgba(0, 119, 182, 0.2), inset 0 2px 3px rgba(255, 255, 255, 1);
+            border: 1px solid rgba(255, 255, 255, 0.6); display: flex; justify-content: center; align-items: center;
+            margin-bottom: 1rem; position: relative; overflow: hidden; font-size: 2.8rem;
         }
 
-        /* INFO DEL ESTUDIANTE */
-        .student-info {
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            margin-bottom: 30px;
-            border-left: 5px solid var(--accent-color);
+        .glossy-box::after {
+            content: ''; position: absolute; top: 2%; left: 5%; width: 90%; height: 45%;
+            background: linear-gradient(180deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.1) 100%);
+            border-radius: 20px 20px 100px 100px; pointer-events: none;
         }
 
-        .student-info h2 {
-            font-size: 1.3rem;
-            color: var(--primary-color);
-            margin-bottom: 5px;
+        .folder-name {
+            font-size: 0.9rem; font-weight: 600; color: #005682; text-align: center;
+            background: rgba(255,255,255,0.5); padding: 5px 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.5);
         }
 
-        .student-info p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            line-height: 1.5;
+        .info-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 8px 24px rgba(0, 119, 182, 0.15);
+            padding: 2rem; border-radius: 20px; text-align: center; max-width: 600px; width: 100%;
+            color: #005682; font-weight: 500; font-size: 1.1rem; line-height: 1.6;
         }
 
-        /* VISTAS DE MENÚS (GRID DE CARPETAS) */
-        .menu-view {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
+        .submenu-section, #viewer-container { display: none; width: 100%; flex-direction: column; align-items: center; }
 
-        .section-title {
-            font-size: 1.4rem;
-            color: var(--primary-color);
-            border-bottom: 2px solid #ddd;
-            padding-bottom: 8px;
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+        iframe { width: 100%; height: 80vh; border-radius: 15px; border: 4px solid white; background: white; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-top: 15px;}
 
-        .grid-folders {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
-        }
-
-        /* TARJETAS / BOTONES (CARPETAS Y ARCHIVOS) */
-        .card {
-            background: var(--card-bg);
-            border: 1px solid #e1e8ed;
-            border-radius: var(--border-radius);
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            cursor: pointer;
-            transition: var(--transition);
-            box-shadow: var(--shadow);
-        }
-
-        .card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-            border-color: var(--primary-color);
-        }
-
-        .card-icon {
-            font-size: 2.2rem;
-            line-height: 1;
-        }
-
-        .folder-icon { color: #ffca28; }
-        .file-icon { color: #f44336; }
-
-        .card-details h3 {
-            font-size: 0.95rem;
-            color: var(--text-color);
-            font-weight: 600;
-            margin-bottom: 2px;
-        }
-
-        .card-details p {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        /* BOTONES DE ACCIÓN */
         .btn-nav {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
+            margin-bottom: 20px; padding: 12px 30px;
+            background: linear-gradient(180deg, #4cc9f0 0%, #4361ee 100%);
+            color: white; border: none; border-radius: 50px; font-weight: bold; cursor: pointer;
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4); transition: 0.3s;
         }
 
-        .btn-nav:hover {
-            background-color: #001f4d;
-        }
+        .btn-nav:hover { transform: scale(1.05); filter: brightness(1.1); }
 
-        /* VISOR DE DOCUMENTOS */
-        #viewer-container {
-            display: none;
-            flex-direction: column;
-            gap: 15px;
-            height: 80vh;
-        }
-
-        #doc-iframe {
-            width: 100%;
-            height: 100%;
-            border: 1px solid #ccc;
-            border-radius: var(--border-radius);
-            background: white;
-            box-shadow: var(--shadow);
-        }
-
-        /* FOOTER */
-        footer {
-            background-color: #1e1e1e;
-            color: #aeaeae;
-            text-align: center;
-            padding: 15px;
-            font-size: 0.8rem;
-            margin-top: 40px;
-        }
     </style>
 </head>
 <body>
 
-    <!-- CABECERA -->
-    <header>
-        <h1>Portafolio Digital Académico</h1>
-        <p>Universidad Central del Ecuador • Pedagogía de las Ciencias Experimentales Informática</p>
+    <header id="main-header">
+        <h1>Universidad Central del Ecuador</h1>
+        <h2>Facultad de Filosofía, Ciencias y Letras de la Educación</h2>
+        <p>Pedagogía en Ciencias Experimentales Informática</p>
+        <div class="header-details">
+            Portafolio de Física Aplicada | Andrés Jumbo | 5to Semestre<br>
+            Profesor: Diego Tipán
+        </div>
     </header>
 
-    <main>
-        <!-- INFORMACIÓN DEL ESTUDIANTE -->
-        <section class="student-info">
-            <h2>Andrés Vicente Jumbo Ramos</h2>
-            <p><strong>Asignatura:</strong> Física Aplicada | <strong>Docente:</strong> Dr. Diego Tipán</p>
-            <p><strong>Semestre:</strong> En curso (Inscrito desde 2022) | <strong>Contacto:</strong> UCE Académico</p>
-        </section>
-
-        <!-- ================= MENÚ RAÍZ ================= -->
-        <section id="menu-root" class="menu-view">
-            <h2 class="section-title">Directorios del Portafolio</h2>
-            <div class="grid-folders">
-                
-                <!-- Carpeta 1 -->
-                <div class="card" onclick="showSubmenu('menu-personal')">
-                    <span class="card-icon folder-icon">📁</span>
-                    <div class="card-details">
-                        <h3>Información General</h3>
-                        <p>CV, Matrícula, Horarios y Sílabo</p>
-                    </div>
-                </div>
-
-                <!-- Carpeta 2 -->
-                <div class="card" onclick="showSubmenu('menu-tareas')">
-                    <span class="card-icon folder-icon">📁</span>
-                    <div class="card-details">
-                        <h3>Tareas Académicas</h3>
-                        <p>Ensayos, mapas mentales y vectores</p>
-                    </div>
-                </div>
-
-                <!-- Carpeta 3 -->
-                <div class="card" onclick="showSubmenu('menu-laboratorio')">
-                    <span class="card-icon folder-icon">📁</span>
-                    <div class="card-details">
-                        <h3>Centro de Física</h3>
-                        <p>Fundamentos teóricos e informes</p>
-                    </div>
-                </div>
-
-                <!-- Carpeta 4 -->
-                <div class="card" onclick="showSubmenu('menu-practicas')">
-                    <span class="card-icon folder-icon">📁</span>
-                    <div class="card-details">
-                        <h3>Prácticas Pre-profesionales</h3>
-                        <p>Planificaciones y tareas de practicante</p>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- ================= SUBMENÚ 1: INFORMACIÓN GENERAL ================= -->
-        <section id="menu-personal" class="submenu-section menu-view" style="display: none;">
-            <div class="section-title">
-                <span>Información General e Institucional</span>
-                <button class="btn-nav" onclick="goBack('menu-root')">← Volver</button>
-            </div>
-            <div class="grid-folders">
-                <div class="card" onclick="openDoc('https://drive.google.com/file/d/TU_ID_CV/preview')">
-                    <span class="card-icon file-icon">📄</span>
-                    <div class="card-details">
-                        <h3>Currículum Vitae</h3>
-                        <p>Hoja de vida - Andrés Jumbo</p>
-                    </div>
-                </div>
-                <div class="card" onclick="openDoc('https://drive.google.com/file/d/TU_ID_MATRICULA/preview')">
-                    <span class="card-icon file-icon">📄</span>
-                    <div class="card-details">
-                        <h3>Documento de Matrícula</h3>
-                        <p>Registro oficial UCE</p>
-                    </div>
-                </div>
-                <div class="card" onclick="openDoc('https://drive.google.com/file/d/TU_ID_HORARIO_G/preview')">
-                    <span class="card-icon file-icon">📄</span>
-                    <div class="card-details">
-                        <h3>Horario General</h3>
-                        <p>Distribución de clases semanales</p>
-                    </div>
-                </div>
-                <div class="card" onclick="openDoc('https://drive.google.com/file/d/TU_ID_HORARIO_I/preview')">
-                    <span class="card-icon file-icon">📄</span>
-                    <div class="card-details">
-                        <h3>Horario de Inglés</h3>
-                        <p>Asignación de suficiencia</p>
-                    </div>
-                </div>
-                <div class="card" onclick="openDoc('https://drive.google.com/file/d/TU_ID_SILABO/preview')">
-                    <span class="card-icon file-icon">📄</span>
-                    <div class="card-details">
-                        <h3>Sílabo de Física Aplicada</h3>
-                        <p>Planificación de la asignatura</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ================= SUBMENÚ 2: TAREAS ACADÉMICAS ================= -->
-        <section id="menu-tareas" class="submenu-section menu-view" style="display: none;">
-            <div class="section-title">
-                <span>Tareas Académicas Individuales y Grupales</span>
-                <button class="btn-nav" onclick="goBack('menu-root')">← Volver</button>
-            </div>
-            <div class="grid-folders">
-                <div class="card" onclick="openDoc('https://drive.google.com/file/d/TU_ID_ENSAYO/preview')">
-                    <span class="card-icon file-icon">📄</span>
-                    <div class="card-details">
-                        <h3>Ensayo de Introducción</h3>
-                        <p>Física en la ciencia informática</p>
-                    </div>
-                </div>
-                <div class="card" onclick="openDoc('https://drive.google.com/file/d/TU_ID_MAPA_SI/preview')">
-                    <span class="card-icon file-icon">📄</span>
-                    <div class="card-details">
-                        <h3>Mapa Mental: S.I.</h3>
-                        <p>Sistema Internacional de Unidades</p>
-                    </div>
-                </div>
-                <div class="card" onclick="openDoc('https://drive.google.com/file/d/TU_ID_EJERCICIOS/preview')">
-                    <span class="card-icon file-icon">📄</span>
-                    <div class="card-details">
-                        <h3>10 Ejercicios de Conversión</h3>
-                        <p>Práctica de cambio de unidades</p>
-                    </div>
-                </div>
-                <div class="card" onclick="openDoc('https://drive.google.com/file/d/TU_ID_MAPA_TRIG/preview')">
-                    <span class="card-icon file-icon">📄</span>
-                    <div class="card-details">
-                        <h3>Mapa Mental: Trigonometría</h3>
-                        <p>Estructura de apoyo trigonométrico</p>
-                    </div>
-                </div>
-                <div class="card" onclick="openDoc('https://drive.google.com/file/d/TU_ID_VECTORES/preview')">
-                    <span class="card-icon file-icon">📄</span>
-                    <div class="card-details">
-                        <h3>10 Gráficos de Vectores 2D</h3>
-                        <p>Ejercicios analíticos y geométricos</p>
-                    </div>
-                </div>
-                <div class="card" onclick="openDoc('https://drive.google.com/file/d/TU_ID_GLOSARIO/preview')">
-                    <span class="card-icon file-icon">📄</span>
-                    <div class="card-details">
-                        <h3>Glosario de Términos</h3>
-                        <p>Vocabulario conceptual de la materia</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ================= SUBMENÚ 3: CENTRO DE FÍSICA ================= -->
-        <section id="menu-laboratorio" class="submenu-section menu-view" style="display: none;">
-            <div class="section-title">
-                <span>Centro de Física - Informes y Fundamentos</span>
-                <button class="btn-nav" onclick="goBack('menu-root')">← Volver</button>
-            </div>
-            <div class="grid-folders">
-                <div class="card" onclick="openDoc('https://drive.google.com/file/d/TU_ID_FUND1/preview')">
-                    <span class="card-icon file-icon">📄</span>
-                    <div class="card-details">
-                        <h3>Fundamento Conceptual 1</h3>
-                        <p>Marco teórico - Práctica 1</p>
-                    </div>
-                </div>
-                <div class="card" onclick="openDoc('https://drive.google.com/file/d/TU_ID_INFO1/preview')">
-                    <span class="card-icon file-icon">📄</span>
-                    <div class="card-details">
-                        <h3>Informe de Práctica 1</h3>
-                        <p>Tablas, cálculos y conclusiones</p>
-                    </div>
-                </div>
-                <div class="card" onclick="openDoc('https://drive.google.com/file/d/TU_ID_FUND2/preview')">
-                    <span class="card-icon file-icon">📄</span>
-                    <div class="card-details">
-                        <h3>Fundamento Conceptual 2</h3>
-                        <p>Marco teórico - Práctica 2</p>
-                    </div>
-                </div>
-                <div class="card" onclick="openDoc('https://drive.google.com/file/d/TU_ID_INFO2/preview')">
-                    <span class="card-icon file-icon">📄</span>
-                    <div class="card-details">
-                        <h3>Informe de Práctica 2</h3>
-                        <p>Tablas, análisis de datos 2</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ================= SUBMENÚ 4: PRÁCTICAS DOCENTES ================= -->
-        <section id="menu-practicas" class="submenu-section menu-view" style="display: none;">
-            <div class="section-title">
-                <span>Prácticas Pre-profesionales (Tareas de la Practicante)</span>
-                <button class="btn-nav" onclick="goBack('menu-root')">← Volver</button>
-            </div>
-            <div class="grid-folders">
-                <div class="card" onclick="openDoc('https://drive.google.com/file/d/TU_ID_PLAN_CLASE/preview')">
-                    <span class="card-icon file-icon">📄</span>
-                    <div class="card-details">
-                        <h3>Planificaciones de Clase</h3>
-                        <p>Diseño curricular de aula (PUD)</p>
-                    </div>
-                </div>
-                <div class="card" onclick="openDoc('https://drive.google.com/file/d/TU_ID_DIARIO_CAMPO/preview')">
-                    <span class="card-icon file-icon">📄</span>
-                    <div class="card-details">
-                        <h3>Diario de Campo / Bitácora</h3>
-                        <p>Registro de actividades diarias de práctica</p>
-                    </div>
-                </div>
-                <div class="card" onclick="openDoc('https://drive.google.com/file/d/TU_ID_FICHA_OBS/preview')">
-                    <span class="card-icon file-icon">📄</span>
-                    <div class="card-details">
-                        <h3>Fichas de Observación</h3>
-                        <p>Instrumentos de control pedagógico</p>
-                    </div>
-                </div>
-                <div class="card" onclick="openDoc('https://drive.google.com/file/d/TU_ID_RECURSOS/preview')">
-                    <span class="card-icon file-icon">📄</span>
-                    <div class="card-details">
-                        <h3>Material Didáctico</h3>
-                        <p>Diapositivas y recursos utilizados</p>
-                    </div>
-                </div>
-                <div class="card" onclick="openDoc('https://drive.google.com/file/d/TU_ID_ASISTENCIA/preview')">
-                    <span class="card-icon file-icon">📄</span>
-                    <div class="card-details">
-                        <h3>Control de Asistencia</h3>
-                        <p>Firmas de horas cumplidas</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ================= VISOR DE DOCUMENTOS ================= -->
-        <section id="viewer-container">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <h3 id="viewer-doc-title" style="font-size: 1.1rem; color: var(--primary-color);">Visualizando Documento</h3>
-                <button class="btn-nav" id="btn-back-viewer">← Cerrar Visor</button>
-            </div>
-            <iframe id="doc-iframe" src="" allow="autoplay"></iframe>
-        </section>
-
+    <!-- MENÚ PRINCIPAL -->
+    <main class="grid-container" id="menu-root">
+        <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1wA377hozXZNZ_TnupGgHwxMVLo30DcMC/preview')">
+            <div class="glossy-box">📜</div><span class="folder-name">Sílabo</span>
+        </div>
+        <div class="folder-link" onclick="showSubmenu('menu-info')">
+            <div class="glossy-box">👤</div><span class="folder-name">Información Personal</span>
+        </div>
+        <div class="folder-link" onclick="showSubmenu('menu-tareas-ind')">
+            <div class="glossy-box">📓</div><span class="folder-name">Tareas Individuales</span>
+        </div>
+        <div class="folder-link" onclick="showSubmenu('menu-ensayos')">
+            <div class="glossy-box">✒️</div><span class="folder-name">Ensayos</span>
+        </div>
+        <div class="folder-link" onclick="showSubmenu('menu-tareas-grup')">
+            <div class="glossy-box">👥</div><span class="folder-name">Tareas Grupales</span>
+        </div>
+        <div class="folder-link" onclick="showSubmenu('menu-centro')">
+            <div class="glossy-box">🔬</div><span class="folder-name">Centro de Física</span>
+        </div>
+        <div class="folder-link" onclick="showSubmenu('menu-evaluaciones')">
+            <div class="glossy-box">📝</div><span class="folder-name">Evaluaciones Virtuales</span>
+        </div>
+        <div class="folder-link" onclick="showSubmenu('menu-deberes-practicante')">
+            <div class="glossy-box">💼</div><span class="folder-name">Deberes de la Practicante</span>
+        </div>
+        <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1AtzCsY8HxpHfU9cWFJpzeOoyeXzlG405/preview')">
+            <div class="glossy-box">📖</div><span class="folder-name">Glosario</span>
+        </div>
     </main>
 
-    <!-- PIE DE PÁGINA -->
-    <footer>
-        <p>© 2026 Andrés Vicente Jumbo Ramos • Portafolio de Prácticas y Física Aplicada • UCE</p>
-    </footer>
+    <!-- SUBMENÚ: INFORMACIÓN PERSONAL -->
+    <section class="submenu-section" id="menu-info">
+        <button class="btn-nav" onclick="goBack('menu-root')">← Volver al Inicio</button>
+        <div class="grid-container">
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1ucsblyUTAxLY-ZvINzyu0ZwA8cWMj8tF/preview')"><div class="glossy-box">👨‍🎓</div><span class="folder-name">Currículum</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/18byDHbYDa-ZRSJj4d4kjAO99r2SujT5q/preview')"><div class="glossy-box">📝</div><span class="folder-name">Matrícula</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/16UzyIug5kpK8Eo7pTCz057yDpVHkv7Me/preview')"><div class="glossy-box">📅</div><span class="folder-name">Horario General</span></div>
+        </div>
+    </section>
 
-    <!-- SCRIPT DE NAVEGACIÓN -->
+    <!-- SUBMENÚ: ENSAYOS -->
+    <section class="submenu-section" id="menu-ensayos">
+        <button class="btn-nav" onclick="goBack('menu-root')">← Volver al Inicio</button>
+        <div class="grid-container">
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1FrEMWFSAJGLexofPBMGK76y0hdw0LhwH/preview')"><div class="glossy-box">🎤</div><span class="folder-name">Ensayo Conferencia</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1f2zK272H2jtuAJbQi_uBNMSfhDnSofNX/preview')"><div class="glossy-box">💡</div><span class="folder-name">Ensayo Smart Learning</span></div>
+            <div class="folder-link" onclick="showSubmenu('menu-ensayo-libro')"><div class="glossy-box">📚</div><span class="folder-name">Ensayo del Libro</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/141kEJx9Os1RJyn5NYVGNNnv7e740SjCp/preview')"><div class="glossy-box">🎬</div><span class="folder-name">Ensayo del Video</span></div>
+        </div>
+    </section>
+
+    <!-- SUBMENÚ: ENSAYO DEL LIBRO -->
+    <section class="submenu-section" id="menu-ensayo-libro">
+        <button class="btn-nav" onclick="goBack('menu-ensayos')">← Volver a Ensayos</button>
+        <div class="grid-container">
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1Tz1KBnuGdxwx1UKFxdHKHWaRoOmPwUkn/preview')"><div class="glossy-box">1️⃣</div><span class="folder-name">Capítulo 1</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/126hqR-zJiF6e_lMKU2Q7Jg5u8ds6xjb9/preview')"><div class="glossy-box">2️⃣</div><span class="folder-name">Capítulo 2</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1ylhw-TmyJORM_BlAHaCRrE4mn-bxnZph/preview')"><div class="glossy-box">3️⃣</div><span class="folder-name">Capítulo 3</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1qO_xQTFbvleHDav1mz_p0GosBeRhkp49/preview')"><div class="glossy-box">4️⃣</div><span class="folder-name">Capítulo 4</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1-qyqsbiQdcGe2c0oMvX49G12dZDtWcNI/preview')"><div class="glossy-box">📋</div><span class="folder-name">Rúbrica</span></div>
+        </div>
+    </section>
+
+    <!-- SUBMENÚ: TAREAS GRUPALES -->
+    <section class="submenu-section" id="menu-tareas-grup">
+        <button class="btn-nav" onclick="goBack('menu-root')">← Volver al Inicio</button>
+        <div class="grid-container">
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/15Ms6UVcZhPMbndJseI7RPCpMKYJpJxe-/preview')"><div class="glossy-box">💻</div><span class="folder-name">Fundamento Digital</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1yf3fG5n27BodHbASVy19hUCbFSLrXo1o/preview')"><div class="glossy-box">📝</div><span class="folder-name">Fundamento Escrito</span></div>
+        </div>
+    </section>
+
+    <!-- SUBMENÚ: TAREAS INDIVIDUALES (UNIDADES) -->
+    <section class="submenu-section" id="menu-tareas-ind">
+        <button class="btn-nav" onclick="goBack('menu-root')">← Volver al Inicio</button>
+        <div class="grid-container">
+            <div class="folder-link" onclick="showSubmenu('menu-ind-u1')"><div class="glossy-box">1️⃣</div><span class="folder-name">Unidad 1</span></div>
+            <div class="folder-link" onclick="showSubmenu('menu-ind-u2')"><div class="glossy-box">2️⃣</div><span class="folder-name">Unidad 2</span></div>
+            <div class="folder-link" onclick="showSubmenu('menu-ind-u3')"><div class="glossy-box">3️⃣</div><span class="folder-name">Unidad 3</span></div>
+            <div class="folder-link" onclick="showSubmenu('menu-ind-u4')"><div class="glossy-box">4️⃣</div><span class="folder-name">Unidad 4</span></div>
+        </div>
+    </section>
+
+    <!-- TAREAS INDIVIDUALES: UNIDAD 1 -->
+    <section class="submenu-section" id="menu-ind-u1">
+        <button class="btn-nav" onclick="goBack('menu-tareas-ind')">← Volver a Unidades</button>
+        <div class="grid-container">
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1l2EJ9ZZwCA25am3EnK7X-bWUFPGdQDix/preview')"><div class="glossy-box">✍️</div><span class="folder-name">Ensayo</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1ZkQUBwZ0vIzofFQ6jyfcUy6tLVLv6p_6/preview')"><div class="glossy-box">🧠</div><span class="folder-name">Mapa Mental SI</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1sS-uMWPysFVXiRJYMGSXjWbd2C1Y1_Zz/preview')"><div class="glossy-box">📏</div><span class="folder-name">10 Ejercicios Conv.</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1HR_nJ2ISYUeZGGYGMg60KjPIRtfNlSdp/preview')"><div class="glossy-box">📐</div><span class="folder-name">M. Mental Trigonometría</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1rtoMoJ9aKTK1mTF7o6R635YT9gAao6dZ/preview')"><div class="glossy-box">📈</div><span class="folder-name">10 Gráficos Vectores</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1HDDz9mkKYyXoIKU8FktUTUzX9nU2Bn49/preview')"><div class="glossy-box">🧭</div><span class="folder-name">Ejercicios Representación de Vectores</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1VEtZfOyYbtkdYFtdQ9xkrfYWHbcou68b/preview')"><div class="glossy-box">➕</div><span class="folder-name">5 Ejercicios Suma de Vectores 3D</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1KGTJUaPUi6ATctW4GvbyM8H07MGukIje/preview')"><div class="glossy-box">➕</div><span class="folder-name">7 Ejercicios Suma de Vectores 3D (3 Vectores)</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1Fgqk8_P5NnUUwaTMfeTPM6HSHvcsi_0G/preview')"><div class="glossy-box">🗺️</div><span class="folder-name">Mapa de la Unidad 1</span></div>
+        </div>
+    </section>
+    
+    <!-- TAREAS INDIVIDUALES: UNIDAD 2 -->
+    <section class="submenu-section" id="menu-ind-u2">
+        <button class="btn-nav" onclick="goBack('menu-tareas-ind')">← Volver a Unidades</button>
+        <div class="grid-container">
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/160Tcw9c8cRpsyNQq4rd10kntX5_2CWoC/preview')"><div class="glossy-box">🧠</div><span class="folder-name">Mapa Mental Unidad 2</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1fb0vO1tALD4G7kY8DDOOv2Qa0F18xSQb/preview')"><div class="glossy-box">🗺️</div><span class="folder-name">Mapa de Cinemática</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1zYxJUpHU1g28KPE4TuMnc5p7GXhNaKkT/preview')"><div class="glossy-box">📏</div><span class="folder-name">10 Ejercicios MCU y MCUA</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1Hd6oTUkPFfMLF664KmfNsgmeF_q_oreU/preview')"><div class="glossy-box">🧠</div><span class="folder-name">Mapa Mental MCU y MCUA</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1Zo3ZBxIFOjbH1y7kliPGPnuAwQOwj6Hn/preview')"><div class="glossy-box">🗺️</div><span class="folder-name">Mapa Ecuaciones Horarias (Rotación y Traslación)</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1JVbNN1wewfkC0t-PxdfPSojQzb03MSA2/preview')"><div class="glossy-box">📐</div><span class="folder-name">7 Ejercicios Movimiento Parabólico</span></div>
+        </div>
+    </section>
+    
+    <!-- TAREAS INDIVIDUALES: UNIDAD 3 -->
+    <section class="submenu-section" id="menu-ind-u3">
+        <button class="btn-nav" onclick="goBack('menu-tareas-ind')">← Volver a Unidades</button>
+        <div class="grid-container">
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1DM3mAibeTmeLmuS05vz5Jq3K9y7tDv0I/preview')"><div class="glossy-box">🗺️</div><span class="folder-name">Mapa de la Unidad 3</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1q4RSanI7OYyc7xN1J8s2GYqbFC-mhBga/preview')"><div class="glossy-box">📏</div><span class="folder-name">26 Ejercicios con D.C.L.</span></div>
+        </div>
+    </section>
+    
+    <!-- TAREAS INDIVIDUALES: UNIDAD 4 -->
+    <section class="submenu-section" id="menu-ind-u4">
+        <button class="btn-nav" onclick="goBack('menu-tareas-ind')">← Volver a Unidades</button>
+        <div class="info-card">
+            El mapa que se realizó el miércoles 1 de julio del 2026 no se me fue entregado por lo cual no lo puedo agregar pero sí lo realicé.
+        </div>
+    </section>
+
+    <!-- SUBMENÚ PRINCIPAL: CENTRO DE FÍSICA -->
+    <section class="submenu-section" id="menu-centro">
+        <button class="btn-nav" onclick="goBack('menu-root')">← Volver al Inicio</button>
+        <div class="grid-container">
+            <div class="folder-link" onclick="showSubmenu('menu-p1')"><div class="glossy-box">🔬</div><span class="folder-name">Práctica 1</span></div>
+            <div class="folder-link" onclick="showSubmenu('menu-p2')"><div class="glossy-box">🔬</div><span class="folder-name">Práctica 2</span></div>
+            <div class="folder-link" onclick="showSubmenu('menu-p3')"><div class="glossy-box">🔬</div><span class="folder-name">Práctica 3</span></div>
+            <div class="folder-link" onclick="showSubmenu('menu-p4')"><div class="glossy-box">🔬</div><span class="folder-name">Práctica 4</span></div>
+            <div class="folder-link" onclick="showSubmenu('menu-p5')"><div class="glossy-box">🔬</div><span class="folder-name">Práctica 5</span></div>
+            <div class="folder-link" onclick="showSubmenu('menu-p6')"><div class="glossy-box">🔬</div><span class="folder-name">Práctica 6</span></div>
+            <div class="folder-link" onclick="showSubmenu('menu-p7')"><div class="glossy-box">🔬</div><span class="folder-name">Práctica 7</span></div>
+            <div class="folder-link" onclick="showSubmenu('menu-p8')"><div class="glossy-box">🔬</div><span class="folder-name">Práctica 8</span></div>
+            <div class="folder-link" onclick="showSubmenu('menu-p9')"><div class="glossy-box">🔬</div><span class="folder-name">Práctica 9</span></div>
+            <div class="folder-link" onclick="showSubmenu('menu-p10')"><div class="glossy-box">🔬</div><span class="folder-name">Práctica 10</span></div>
+        </div>
+    </section>
+
+    <!-- CONTENIDOS DETALLADOS DE CADA PRÁCTICA -->
+    <section class="submenu-section" id="menu-p1">
+        <button class="btn-nav" onclick="goBack('menu-centro')">← Volver a Prácticas</button>
+        <div class="grid-container">
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1-LkIVhBW7brdRQ_H1me8bZNbLjSmsNdj/preview')"><div class="glossy-box">📖</div><span class="folder-name">Fundamento P1</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1HjMLn-AqoyNil-xL5xeQcbQjFObgdgaV/preview')"><div class="glossy-box">📊</div><span class="folder-name">Informe P1</span></div>
+        </div>
+    </section>
+
+    <section class="submenu-section" id="menu-p2">
+        <button class="btn-nav" onclick="goBack('menu-centro')">← Volver a Prácticas</button>
+        <div class="grid-container">
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1MPkjDflHibXJR-QxoSs--Soz8L1q71zN/preview')"><div class="glossy-box">📖</div><span class="folder-name">Fundamento P2</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/16QlKsRj3JVrecVYa_4xekqFt0TWPN9Vo/preview')"><div class="glossy-box">📊</div><span class="folder-name">Informe P2</span></div>
+        </div>
+    </section>
+
+    <section class="submenu-section" id="menu-p3">
+        <button class="btn-nav" onclick="goBack('menu-centro')">← Volver a Prácticas</button>
+        <div class="grid-container">
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1dcoGqF3X4zCn1ZDLPHKb2cBY0WGWVGzu/preview')"><div class="glossy-box">📖</div><span class="folder-name">Fundamento P3</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1bBWIFMEdeoi_fhvfYmudiW5aQ_YPd4Gn/preview')"><div class="glossy-box">📊</div><span class="folder-name">Informe P3</span></div>
+        </div>
+    </section>
+
+    <section class="submenu-section" id="menu-p4">
+        <button class="btn-nav" onclick="goBack('menu-centro')">← Volver a Prácticas</button>
+        <div class="grid-container">
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/16rhZK_nYidHB6Ml94o1neM_ZQLT7Z6B6/preview')"><div class="glossy-box">📖</div><span class="folder-name">Fundamento P4</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1BpDKOe7XIReBxwZBl5ciBvLVmqgrX-KK/preview')"><div class="glossy-box">📊</div><span class="folder-name">Informe P4</span></div>
+        </div>
+    </section>
+
+    <section class="submenu-section" id="menu-p5">
+        <button class="btn-nav" onclick="goBack('menu-centro')">← Volver a Prácticas</button>
+        <div class="grid-container">
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/11gMrmoU7eDBhkTfposbHwl_bdAarTmAg/preview')"><div class="glossy-box">📖</div><span class="folder-name">Fundamento P5</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1ybzDFdW_1QrnSGg33xLv1N0DTD2kStiu/preview')"><div class="glossy-box">📊</div><span class="folder-name">Informe P5</span></div>
+        </div>
+    </section>
+
+    <section class="submenu-section" id="menu-p6">
+        <button class="btn-nav" onclick="goBack('menu-centro')">← Volver a Prácticas</button>
+        <div class="grid-container">
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/18EZiG4Xk2wpoVLGdVSKvfnzI18vG0Xne/preview')"><div class="glossy-box">📖</div><span class="folder-name">Fundamento P6</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1uhuwXaFi5RqTxc5XFDzgaU7H-1xXfR0z/preview')"><div class="glossy-box">📊</div><span class="folder-name">Informe P6</span></div>
+        </div>
+    </section>
+
+    <section class="submenu-section" id="menu-p7">
+        <button class="btn-nav" onclick="goBack('menu-centro')">← Volver a Prácticas</button>
+        <div class="grid-container">
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1NC5yyzgXCdKuO7U8IpoRgRsPVplGRQoA/preview')"><div class="glossy-box">📖</div><span class="folder-name">Fundamento P7</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1CfX7ucZd4k5ISQUnk9RQ_-56GvebV4ZP/preview')"><div class="glossy-box">📊</div><span class="folder-name">Informe P7</span></div>
+        </div>
+    </section>
+
+    <section class="submenu-section" id="menu-p8">
+        <button class="btn-nav" onclick="goBack('menu-centro')">← Volver a Prácticas</button>
+        <div class="grid-container">
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1rFPOhYkXvCdbtp8gX6JfXR1BhsnTV5FJ/preview')"><div class="glossy-box">📖</div><span class="folder-name">Fundamento P8</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1sirR0QkofWJsYPtKu23GzTTSt0uzaBfI/preview')"><div class="glossy-box">📊</div><span class="folder-name">Informe P8</span></div>
+        </div>
+    </section>
+
+    <section class="submenu-section" id="menu-p9">
+        <button class="btn-nav" onclick="goBack('menu-centro')">← Volver a Prácticas</button>
+        <div class="grid-container">
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1cqH_A_jvzn48R1ocFnWfkYbVkjNhbr9c/preview')"><div class="glossy-box">📖</div><span class="folder-name">Fundamento P9</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1krNVd6sTw9gDndJ9bdzXectPsrfLt97r/preview')"><div class="glossy-box">📊</div><span class="folder-name">Informe P9</span></div>
+        </div>
+    </section>
+
+    <section class="submenu-section" id="menu-p10">
+        <button class="btn-nav" onclick="goBack('menu-centro')">← Volver a Prácticas</button>
+        <div class="grid-container">
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1-hqGrRSj5DY_SvCVj0yFiKIlza0DAbkF/preview')"><div class="glossy-box">📖</div><span class="folder-name">Fundamento P10</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/18w2wlQyJlK3lBpuCy1mxKGXuytLB013U/preview')"><div class="glossy-box">📊</div><span class="folder-name">Informe P10</span></div>
+        </div>
+    </section>
+
+
+    <!-- SUBMENÚ PRINCIPAL: EVALUACIONES VIRTUALES -->
+    <section class="submenu-section" id="menu-evaluaciones">
+        <button class="btn-nav" onclick="goBack('menu-root')">← Volver al Inicio</button>
+        <div class="grid-container">
+            <div class="folder-link" onclick="showSubmenu('menu-eva-u1')"><div class="glossy-box">1️⃣</div><span class="folder-name">Evaluación Unidad 1</span></div>
+            <div class="folder-link" onclick="showSubmenu('menu-eva-u2')"><div class="glossy-box">2️⃣</div><span class="folder-name">Evaluación Unidad 2</span></div>
+            <div class="folder-link" onclick="showSubmenu('menu-eva-u3')"><div class="glossy-box">3️⃣</div><span class="folder-name">Evaluación Unidad 3</span></div>
+            <div class="folder-link" onclick="showSubmenu('menu-eva-u4')"><div class="glossy-box">4️⃣</div><span class="folder-name">Evaluación Unidad 4</span></div>
+        </div>
+    </section>
+
+    <!-- DETALLES EVALUACIONES: UNIDAD 1 -->
+    <section class="submenu-section" id="menu-eva-u1">
+        <button class="btn-nav" onclick="goBack('menu-evaluaciones')">← Volver a Evaluaciones</button>
+        <div class="grid-container">
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1jrP4_4HM2h5LYUc9HyOlGo1HujA5BElG/preview')"><div class="glossy-box">📸</div><span class="folder-name">Prueba 1</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1_M9ev5VMcfeMDXIZD9fUNILpbQnyOXvE/preview')"><div class="glossy-box">📸</div><span class="folder-name">Prueba 2</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1XL5AKCXhRSCCVyNZNW28Ve3IFHpiD-L0/preview')"><div class="glossy-box">📸</div><span class="folder-name">Prueba 3</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1gxwKtZacLkj-tUf2nA-PV6lLzqD3xGKD/preview')"><div class="glossy-box">📸</div><span class="folder-name">Prueba 4</span></div>
+        </div>
+    </section>
+
+    <!-- DETALLES EVALUACIONES: UNIDAD 2 -->
+    <section class="submenu-section" id="menu-eva-u2">
+        <button class="btn-nav" onclick="goBack('menu-evaluaciones')">← Volver a Evaluaciones</button>
+        <div class="grid-container">
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1h3BeKX12Sufjzw8nd84ZIVNPPGAXfWKr/preview')"><div class="glossy-box">📸</div><span class="folder-name">Prueba 1</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1krHdaPFfdhuQVzOHJAcc48e0hk2ssCU0/preview')"><div class="glossy-box">📸</div><span class="folder-name">Prueba 2</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1qNYWGR59SlzPnUEM32wOVt9w-Z4AxwSa/preview')"><div class="glossy-box">📸</div><span class="folder-name">Prueba 3</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1K6PM8d4e3gF9C6OC0lFxyDvxtFY0iIHy/preview')"><div class="glossy-box">📸</div><span class="folder-name">Prueba 4</span></div>
+        </div>
+    </section>
+
+    <!-- DETALLES EVALUACIONES: UNIDAD 3 -->
+    <section class="submenu-section" id="menu-eva-u3">
+        <button class="btn-nav" onclick="goBack('menu-evaluaciones')">← Volver a Evaluaciones</button>
+        <div class="grid-container">
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1MDM9odsyyuM4Djeznw1LF3GDUTc4kExk/preview')"><div class="glossy-box">📸</div><span class="folder-name">Prueba 1</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1lc_tJs49U3zvDbKGmlJghZ27I6TNvE9x/preview')"><div class="glossy-box">📸</div><span class="folder-name">Prueba 2</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1sAVwsjxYrmzioLzQFuXfaVz-6mqNz0xp/preview')"><div class="glossy-box">📸</div><span class="folder-name">Prueba 3</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1-CIe5MQl5d8f8XkU8bIuggjvviHwY4wP/preview')"><div class="glossy-box">📸</div><span class="folder-name">Prueba 4</span></div>
+        </div>
+    </section>
+
+    <!-- DETALLES EVALUACIONES: UNIDAD 4 -->
+    <section class="submenu-section" id="menu-eva-u4">
+        <button class="btn-nav" onclick="goBack('menu-evaluaciones')">← Volver a Evaluaciones</button>
+        <div class="grid-container">
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1meYja9UVAR8HYBfADGUaIH9cxF7edKgP/preview')"><div class="glossy-box">📸</div><span class="folder-name">Prueba 1</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/19JmN3042xP-bzY0pG5MKaIaCSVYdWfiM/preview')"><div class="glossy-box">📸</div><span class="folder-name">Prueba 2</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1DoOr24YDlV53HHmVnznMR8eSKe1RCcgG/preview')"><div class="glossy-box">📸</div><span class="folder-name">Prueba 3</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1b0PkZOXttdCdpJSZCSAbgWiSgKX3u8W0/preview')"><div class="glossy-box">📸</div><span class="folder-name">Prueba 4</span></div>
+        </div>
+    </section>
+
+    <!-- SUBMENÚ: DEBERES DE LA PRACTICANTE (8 TAREAS - 3 Y 4 EN UN SOLO DOCUMENTO) -->
+    <section class="submenu-section" id="menu-deberes-practicante">
+        <button class="btn-nav" onclick="goBack('menu-root')">← Volver al Inicio</button>
+        <div class="grid-container">
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1gh6g_NLIWEsEv48j2fofkrzfjNdNifsh/preview')"><div class="glossy-box">📁</div><span class="folder-name">Tarea 1</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/15Uw9OBTFOAXgrPijvSjYq1rDNeqp167V/preview')"><div class="glossy-box">📁</div><span class="folder-name">Tarea 2</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1VH8BQZmECigAZnYf47TuJpWnWt1nxBhS/preview')"><div class="glossy-box">📁</div><span class="folder-name">Tarea 3</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1VH8BQZmECigAZnYf47TuJpWnWt1nxBhS/preview')"><div class="glossy-box">📁</div><span class="folder-name">Tarea 4</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1RKIBoz0DOjQpToEL1GYdRF54ulRGS5J9/preview')"><div class="glossy-box">📁</div><span class="folder-name">Tarea 5</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1gh6g_NLIWEsEv48j2fofkrzfjNdNifsh/preview')"><div class="glossy-box">📁</div><span class="folder-name">Tarea 6</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/15Uw9OBTFOAXgrPijvSjYq1rDNeqp167V/preview')"><div class="glossy-box">📁</div><span class="folder-name">Tarea 7</span></div>
+            <div class="folder-link" onclick="openDoc('https://drive.google.com/file/d/1VH8BQZmECigAZnYf47TuJpWnWt1nxBhS/preview')"><div class="glossy-box">📁</div><span class="folder-name">Tarea 8</span></div>
+        </div>
+    </section>
+
+    <!-- VISOR INTERACTIVO DE DOCUMENTOS (IFRAME) -->
+    <section id="viewer-container">
+        <button class="btn-nav" onclick="closeDoc()">← Cerrar Documento</button>
+        <iframe id="doc-iframe" src="" allow="autoplay"></iframe>
+    </section>
+
+    <!-- CONTROLADOR JAVASCRIPT DE NAVEGACIÓN -->
     <script>
-        let previousMenuId = 'menu-root';
+        let menuAnterior = 'menu-root';
 
-        function hideAll() {
+        function showSubmenu(idSubmenu) {
+            // Ocultamos la cabecera principal e inicio
+            document.getElementById('main-header').style.display = 'none';
             document.getElementById('menu-root').style.display = 'none';
             document.getElementById('viewer-container').style.display = 'none';
-            
-            const submenus = document.querySelectorAll('.submenu-section');
-            submenus.forEach(menu => {
-                menu.style.display = 'none';
-            });
-        }
 
-        function showSubmenu(menuId) {
-            hideAll();
-            const targetMenu = document.getElementById(menuId);
+            // Ocultamos todos los submenús por si hay alguno abierto
+            const submenus = document.querySelectorAll('.submenu-section');
+            submenus.forEach(sub => sub.style.display = 'none');
+
+            // Mostramos el submenú correspondiente
+            const targetMenu = document.getElementById(idSubmenu);
             if (targetMenu) {
                 targetMenu.style.display = 'flex';
-                if (menuId !== 'viewer-container') {
-                    previousMenuId = menuId;
+            }
+        }
+
+        function goBack(idDestino) {
+            // Ocultamos todos los submenús
+            const submenus = document.querySelectorAll('.submenu-section');
+            submenus.forEach(sub => sub.style.display = 'none');
+            document.getElementById('viewer-container').style.display = 'none';
+
+            if (idDestino === 'menu-root') {
+                // Volvemos al inicio mostrando la cabecera
+                document.getElementById('main-header').style.display = 'block';
+                document.getElementById('menu-root').style.display = 'flex';
+            } else {
+                // Navegamos a un submenú específico
+                const targetMenu = document.getElementById(idDestino);
+                if (targetMenu) {
+                    targetMenu.style.display = 'flex';
                 }
             }
         }
 
-        function goBack(parentId) {
-            showSubmenu(parentId);
-        }
-
         function openDoc(url) {
-            hideAll();
+            // Buscamos cuál submenú o vista estaba abierta antes de lanzar el visor
+            const submenus = document.querySelectorAll('.submenu-section');
+            menuAnterior = 'menu-root'; // Por defecto volver al inicio
+            
+            submenus.forEach(sub => {
+                if (sub.style.display === 'flex') {
+                    menuAnterior = sub.id;
+                    sub.style.display = 'none';
+                }
+            });
+
+            // Si se abrió desde el inicio
+            if (document.getElementById('menu-root').style.display === 'flex') {
+                menuAnterior = 'menu-root';
+                document.getElementById('menu-root').style.display = 'none';
+                document.getElementById('main-header').style.display = 'none';
+            }
+
+            // Cargamos el URL en el iframe y mostramos el visor
             const iframe = document.getElementById('doc-iframe');
             iframe.src = url;
-            
-            const backBtn = document.getElementById('btn-back-viewer');
-            backBtn.onclick = function() {
-                iframe.src = ""; // Limpia la memoria del iframe para evitar consumo innecesario
-                showSubmenu(previousMenuId);
-            };
-
             document.getElementById('viewer-container').style.display = 'flex';
+        }
+
+        function closeDoc() {
+            // Vaciamos el iframe para detener cargas en segundo plano
+            document.getElementById('doc-iframe').src = "";
+            document.getElementById('viewer-container').style.display = 'none';
+
+            // Restauramos el menú o submenú donde estábamos anteriormente
+            if (menuAnterior === 'menu-root') {
+                document.getElementById('main-header').style.display = 'block';
+                document.getElementById('menu-root').style.display = 'flex';
+            } else {
+                const targetMenu = document.getElementById(menuAnterior);
+                if (targetMenu) {
+                    targetMenu.style.display = 'flex';
+                }
+            }
         }
     </script>
 </body>
